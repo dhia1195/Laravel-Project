@@ -16,6 +16,7 @@ use App\Http\Livewire\Rtl;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
+Use App\Http\Controllers\TransportController;
 
 use Illuminate\Http\Request;
 
@@ -51,5 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    Route::resource('transport', TransportController::class);
+    Route::get('/transport/edit/{id}', [TransportController::class, 'edit'])->name('transport.edit');
+    Route::put('/transport/{id}', [TransportController::class, 'update'])->name('transport.update');
+    Route::get('/transports/{id}', [TransportController::class, 'show'])->name('transport.show');
 });
 
