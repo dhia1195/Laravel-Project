@@ -42,7 +42,7 @@
     </button>
         <div class="card">
                     <div class="card-header pb-0 px-3">
-                        <h6 class="mb-0">Billing Information</h6>
+                        <h6 class="mb-0">Liste des réclamations</h6>
                     </div>
                     <div class="card-body pt-4 p-3">
                         <div style="max-height: 500px; overflow-y: auto;">
@@ -52,10 +52,16 @@
                         <li class="list-group-item border-0 d-flex flex-column p-4 mb-2 bg-gray-100 border-radius-lg">
                                 
                                 <!-- Title centered -->
-                                <div class="d-flex flex-column mb-3">
+                                <div class="d-flex flex-column">
                                         <!-- Titre as Company Name -->
                                         <h6 class="mb-3 text-center text-md" style="color: #ff6347;">{{ $reclamation->titre }}</h6>
                                 </div>
+
+                                <span class="text-md">Nom: 
+                                        <span class="text-dark ms-2 font-weight-bold">
+                                                {{ $reclamation->user->name }} <!-- Display user's name -->
+                                        </span>
+                                </span>
                                 
                                 <!-- Description and Buttons side by side -->
                                 <div class="d-flex justify-content-between align-items-center">
@@ -90,6 +96,16 @@
                                                 N/A
                                                 @endif
                                         </span>
+                                        </span>
+
+                                        <span class="text-xs">Date de modification: 
+                                                <span class="text-dark ms-2 font-weight-bold">
+                                                        @if ($reclamation->updated_at)
+                                                        {{ $reclamation->updated_at->format('Y-m-d') }}
+                                                        @else
+                                                        N/A
+                                                        @endif
+                                                </span>
                                         </span>
                                 </div>
                                 </li>

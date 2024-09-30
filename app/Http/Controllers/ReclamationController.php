@@ -31,15 +31,17 @@ class ReclamationController extends Controller
             // Add other validation rules as needed
         ]);
 
+        $userId = Auth::check() ? Auth::id() : 1;
+
         Reclamation::create([
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'titre' => $request->titre,
             'description' => $request->description,
             'created_at' => Carbon::now(),
             // Add other fields as necessary
         ]);
 
-        return redirect()->route('reclamations.index')->with('success', 'Reclamation added successfully.');
+        return response()->json(['success' => 'Reclamation added successfully.']);
     }
 
     // Show a specific reclamation
@@ -78,5 +80,11 @@ class ReclamationController extends Controller
         $reclamation->delete(); // Delete the reclamation
         return redirect()->route('reclamations.index')->with('success', 'Reclamation deleted successfully.');
     }
+
+    public function showForClient()
+{
+    $reclamation = Reclamation::all();
+    return view('frontend.reclamation', compact('reclamation'));
+}
 
 }
