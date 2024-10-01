@@ -15,7 +15,6 @@
                 </div>
 
                 <div class="mb-4">
-                    <a href="{{ route('transport.edit', $transport->id) }}" class="btn btn-warning">Edit</a>
                     <a href="{{ route('transport.index') }}" class="btn btn-secondary">Back to List</a>
                 </div>
             </div>

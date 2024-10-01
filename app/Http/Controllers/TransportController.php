@@ -83,4 +83,16 @@ class TransportController extends Controller
         $transport->delete();
         return redirect()->route('transport.index')->with('success', 'Transport supprimé avec succès');
     }
+    public function frontendIndex()
+    {
+    $transports = Transport::all(); 
+    return view('frontTransport.front', compact('transports')); 
+    }  
+    public function frontdetails($id)
+{
+    $transports = Transport::findOrFail($id);
+
+    return view('frontTransport.showFront', compact('transports'));
+}
+
 }

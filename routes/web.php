@@ -42,6 +42,8 @@ Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-passwo
 
 Route::get('/reset-password/{id}',ResetPassword::class)->name('reset-password')->middleware('signed');
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/billing', Billing::class)->name('billing');
@@ -53,8 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
     Route::resource('transport', TransportController::class);
-    Route::get('/transport/edit/{id}', [TransportController::class, 'edit'])->name('transport.edit');
-    Route::put('/transport/{id}', [TransportController::class, 'update'])->name('transport.update');
-    Route::get('/transports/{id}', [TransportController::class, 'show'])->name('transport.show');
+    Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
+    Route::get('/frontdetails/{id}', [TransportController::class, 'frontdetails'])->name('frontTransport.showFront');
+   
 });
 
