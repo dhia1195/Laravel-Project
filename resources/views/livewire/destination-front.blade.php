@@ -14,9 +14,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $destination->nom }}</h5>
                             <p class="card-text">{{ Str::limit($destination->description, 100) }}</p>
-                            <p><strong>Pays:</strong> {{ $destination->pays }}</p>
+                            {{-- <p><strong>Pays:</strong> {{ $destination->pays }}</p>
                             <p><strong>Region:</strong> {{ $destination->region }}</p>
-                            <p><strong>Type de Tourisme:</strong> {{ $destination->typeTourisme }}</p>
+                            <p><strong>Type de Tourisme:</strong> {{ $destination->typeTourisme }}</p> --}}
                             <div class="d-flex justify-content-between">
                                 <button wire:click="showDetails({{ $destination->id }})" class="btn btn-primary">Show Details</button>
                                

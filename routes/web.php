@@ -37,7 +37,7 @@ Route::get('/', function() {
 
 Route::get('/sign-up', SignUp::class)->name('sign-up');
 Route::get('/login', Login::class)->name('login');
-Route::get('/destinationFront', DestinationFront::class)->name('destination-front');
+
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
 Route::get('/reset-password/{id}',ResetPassword::class)->name('reset-password')->middleware('signed');
@@ -52,8 +52,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
+    Route::middleware('role:admin')->group(function () {
     Route::get('/destination', DestinationC::class)->name('destination');
-    // Route::resource('destination',  DestinationController::class);
+    });
+    Route::middleware('role:client')->group(function () {
+    Route::get('/destinationFront', DestinationFront::class)->name('destination-front');
+    });
+    
 
 });
 
