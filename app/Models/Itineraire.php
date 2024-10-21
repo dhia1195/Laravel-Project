@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Itineraire extends Model
 {
     use HasFactory;
+
     protected $table = 'itineraires';
 
     protected $fillable = [
@@ -19,4 +20,10 @@ class Itineraire extends Model
         'impact_carbone',
         'image_url',
     ];
+
+    // Relation avec EtapeItineraire
+    public function etapes()
+    {
+        return $this->hasMany(EtapeItineraire::class);
+    }
 }

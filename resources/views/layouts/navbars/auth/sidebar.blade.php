@@ -5,7 +5,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
             <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="...">
-            <span class="ms-3 font-weight-bold">Soft UI Dashboard Laravel Livewire</span>
+            <span class="ms-3 font-weight-bold">Infinity</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -68,20 +68,85 @@
                 </a>
             </li>
             <li class="nav-item">
-    <a class="nav-link {{ Route::currentRouteName() == 'itineraires.index' ? 'active' : '' }}"
-       href="{{ route('itineraires.index') }}">
-        <div
-            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <button class="nav-link dropdown-btn">
+        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-3">
+            <svg class="dropdown-icon" width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2L10 12l-8 2 10 10 2-8 8-2L12 2z" fill="currentColor" />
             </svg>
         </div>
-        <span class="nav-link-text ms-1">Itineraries</span>
-    </a>
+        <span class="nav-link-text">Itinéraires</span>
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container" id="itinerairesMenu">
+        <a class="dropdown-item {{ Route::currentRouteName() == 'itineraires.index' ? 'active' : '' }}" href="{{ route('itineraires.index') }}">
+            Itinéraires
+        </a>
+        <a class="dropdown-item" href="{{ route('etapes.index') }}">
+    Étapes
+</a>
+
+    </div>
 </li>
-            <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
-            </li>
+
+<style>/* Dropdown container styling */
+#itinerairesMenu {
+    display: none;
+    padding-left: 15px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff; /* Small visual indicator */
+    border-radius: 5px;
+    list-style: none;
+    margin-top: 5px;
+}
+
+.nav-item {
+    position: relative;
+    display: block;
+    margin-bottom: 0; /* No extra space between items */
+}
+
+/* Show the dropdown container when the class is toggled */
+#itinerairesMenu.show {
+    display: block;
+}
+
+/* Button styling */
+.dropdown-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align icon to the right */
+}
+
+/* Dropdown items styling */
+.dropdown-item {
+    padding: 8px 20px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+/* Rotate icon when dropdown is open */
+.dropdown-icon.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+</style>
+<script>document.querySelector('.dropdown-btn').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('itinerairesMenu');
+    dropdownMenu.classList.toggle('show');
+    this.querySelector('.dropdown-icon').classList.toggle('rotate');
+});
+</script>            
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-profile' ? 'active' : '' }}"
                     href="{{ route('user-profile') }}">
@@ -307,11 +372,7 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li>
-            <li class="nav-link mb-0">
-                <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel-livewire"
-                    class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
-                    Upgrade to PRO</a>
-            </li>
+           
         </ul>
     </div>
     <div class="sidenav-footer mx-3 mt-3 pt-3">
@@ -327,8 +388,7 @@
                 <div class="docs-info">
                     <h6 class="text-white up mb-0">Need help?</h6>
                     <p class="text-xs font-weight-bold">Please check our docs</p>
-                    <a href="/documentation/bootstrap/overview/soft-ui-dashboard/index.html" target="_blank"
-                        class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
+                   
                 </div>
             </div>
         </div>

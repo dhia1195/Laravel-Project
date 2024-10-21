@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItineraireController;
-
+use App\Http\Controllers\EtapeItineraireController;
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\SignUp;
@@ -18,7 +18,6 @@ use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
-
 use Illuminate\Http\Request;
 
 /*
@@ -53,6 +52,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
         Route::get('/destination', DestinationC::class)->name('destination');
         Route::resource('itineraires', ItineraireController::class);
+
+        Route::get('/etapes', [EtapeItineraireController::class, 'index'])->name('etapes.index');
+        Route::get('/etapes/create', [EtapeItineraireController::class, 'create'])->name('etapes.create');
+        Route::post('/etapes', [EtapeItineraireController::class, 'store'])->name('etapes.store');
+        Route::get('/etapes/{id}/edit', [EtapeItineraireController::class, 'edit'])->name('etapes.edit');
+        Route::patch('/etapes/{id}', [EtapeItineraireController::class, 'update'])->name('etapes.update');
+        Route::delete('/etapes/{id}', [EtapeItineraireController::class, 'destroy'])->name('etapes.destroy');
+        
+
 
     });
 
