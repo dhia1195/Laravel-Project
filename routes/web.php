@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/destination', DestinationC::class)->name('destination');
         Route::resource('itineraires', ItineraireController::class);
 
+        Route::resource('etapes', EtapeItineraireController::class);
         Route::get('/etapes', [EtapeItineraireController::class, 'index'])->name('etapes.index');
         Route::get('/etapes/create', [EtapeItineraireController::class, 'create'])->name('etapes.create');
         Route::post('/etapes', [EtapeItineraireController::class, 'store'])->name('etapes.store');

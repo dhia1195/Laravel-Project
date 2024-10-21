@@ -1,7 +1,10 @@
 <x-layouts.app>
-    <div class="container">
-        <h1>Liste des Étapes</h1>
-
+      <div class="container">
+        <div class="text-center mb-4">
+            <h1 class="display-4 font-weight-bold">Liste des Étapes</h1>
+            <p class="lead text-muted">Explorez notre collection d'étapes soigneusement conçues pour guider votre itinéraire.</p>
+            <i class="fas fa-route fa-2x text-primary"></i> <!-- Icon representing steps/itineraries -->
+        </div>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -32,22 +35,33 @@
                         <td>{{ $etape->longitude }}</td>
                         <td>{{ $etape->itineraire->titre }}</td>
                         <td>
-                            <!-- Update button triggers modal -->
-                            <button class="btn btn-primary" onclick="showEditModal({{ $etape->id }})">Modifier</button>
+                            
+                            <a href="{{ route('etapes.show', $etape->id) }}" class="btn btn-info btn-sm" title="View Step">
+        <i class="fas fa-eye"></i> View
+    </a>
+<a href="#" class="btn btn-warning btn-sm" onclick="showEditModal({{ $etape->id }})" title="Edit Step">
+    <i class="fas fa-edit"></i> Edit
+</a>
 
-                            <!-- Delete form -->
-                            <form action="{{ route('etapes.destroy', $etape->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Supprimer</button>
-                            </form>
+<!-- Delete Form -->
+<form action="{{ route('etapes.destroy', $etape->id) }}" method="POST" style="display:inline-block;" title="Delete Step">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this step?');">
+        <i class="fas fa-trash-alt"></i> Delete
+    </button>
+</form>
+
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
+<style>h1 {
+    color: #007bff; /* Replace with your desired color */
+}
+</style>
     <!-- Modal for editing an étape -->
     <div class="modal fade" id="editEtapeModal" tabindex="-1" aria-labelledby="editEtapeModalLabel" aria-hidden="true">
         <div class="modal-dialog">

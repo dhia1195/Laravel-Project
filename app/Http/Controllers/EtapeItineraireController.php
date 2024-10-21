@@ -18,7 +18,15 @@ class EtapeItineraireController extends Controller
         // Return the index view with etapes data
         return view('etapes.index', compact('etapes', 'itineraires'));
     }
-
+    public function show($id)
+    {
+        // Fetch the etape by ID
+        $etape = EtapeItineraire::with('itineraire')->findOrFail($id);
+        
+        // Return the show view with the etape data
+        return view('etapes.show', compact('etape'));
+    }
+    
     // Show the create form
     public function create()
     {
