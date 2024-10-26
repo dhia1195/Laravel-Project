@@ -74,10 +74,6 @@
       </div>
     </div>
   </div>
-  <div class="container my-5">
-    <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">Etapes for Itineraire: {{ $itineraire->name }}</h1>
-    <p class="lead text-center text-muted mb-5">{{ $itineraire->description }}</p>
-
     <div class="container my-5">
     <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">
         Étapes pour Itinéraire: {{ $itineraire->name }}
