@@ -99,20 +99,19 @@
 
                                 <!-- Display associated Etapes -->
                                 @if($itineraire->etapes->isNotEmpty())
-                                    <h6>Étapes associées:</h6>
-                                    <ul class="list-unstyled">
-                                        @foreach($itineraire->etapes as $etape)
-                                            <li>{{ $etape->nom_etape }}</li>
-                                        @endforeach
-                                    </ul>
-                                @else
-                                    <p>Aucune étape associée.</p>
-                                @endif
+    <h6 style="color: blue;">Étapes associées:</h6>
+    <ul class="list-unstyled">
+        @foreach($itineraire->etapes as $etape)
+            <li>{{ $etape->nom_etape }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>Aucune étape associée.</p>
+@endif
 
-                                <!-- Button to show associated steps -->
-                                <a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-primary mt-3">View Steps</a>
-                                Voir Étapes Associées
-                                </a>
+
+<a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-info animated-button mt-3">Voir Étapes Associées</a>
+
                             </div>
                         </div>
                     </div>
