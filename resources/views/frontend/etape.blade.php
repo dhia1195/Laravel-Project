@@ -68,37 +68,35 @@
       </div>
     </div>
   </div>
-    <div class="container my-5">
-        <!-- Add an empty div for spacing -->
-        <div style="height: 100px;"></div>
+  <div class="container my-5">
+    <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">Etapes for Itineraire: {{ $itineraire->name }}</h1>
+    <p class="lead text-center text-muted mb-5">{{ $itineraire->description }}</p>
 
-        <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">Explore Our Itinerary Steps</h1>
-        <p class="lead text-center text-muted mb-5">Discover the steps involved in our exciting itineraries.</p>
-
-        <div class="row"> 
-            @forelse ($etapes as $etape)
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow-lg" style="border: 1px solid #007bff;">
-                        <div class="card-body">
-                            <h5 class="card-title" style="color: #007bff; font-weight: bold;">{{ $etape->nom_etape }}</h5>
-                            <p class="card-text">{{ Str::limit($etape->description_etape, 100) }}</p>
-                            <ul class="list-unstyled">
-                                <li><strong>Order:</strong> {{ $etape->ordre_etape }}</li>
-                                <li><strong>Location:</strong> Lat {{ $etape->latitude }}, Long {{ $etape->longitude }}</li>
-                            </ul>
-                            <a href="{{ route('itineraires.show', $etape->itineraire->id) }}" class="btn" style="background-color: #007bff; color: white; border-radius: 5px;">View Itinerary</a>
-                        </div>
+    <div class="row"> 
+        @forelse ($itineraire->etapes as $etape)
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 shadow-lg" style="border: 1px solid #007bff;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #007bff; font-weight: bold;">{{ $etape->nom_etape }}</h5>
+                        <p class="card-text">{{ Str::limit($etape->description_etape, 100) }}</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Order:</strong> {{ $etape->ordre_etape }}</li>
+                            <li><strong>Location:</strong> Lat {{ $etape->latitude }}, Long {{ $etape->longitude }}</li>
+                        </ul>
+                        <a href="{{ route('itineraires.show', $itineraire->id) }}" class="btn" style="background-color: #007bff; color: white; border-radius: 5px;">View Itinerary</a>
                     </div>
                 </div>
-            @empty
-                <div class="col-12">
-                    <div class="alert alert-info text-center">
-                        No itinerary steps found. Check back later!
-                    </div>
+            </div>
+        @empty
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    No steps found for this itinerary. Check back later!
                 </div>
-            @endforelse
-        </div>
+            </div>
+        @endforelse
     </div>
+</div>
+</div>
 
     </div>
   <footer class="footer pt-5 mt-5">

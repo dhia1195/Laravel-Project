@@ -110,7 +110,7 @@
                                 @endif
 
                                 <!-- Button to show associated steps -->
-                                <a href="{{ route('etapes.index', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-primary mt-3">
+                                <a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-primary mt-3">View Steps</a>
                                 Voir Étapes Associées
                                 </a>
                             </div>

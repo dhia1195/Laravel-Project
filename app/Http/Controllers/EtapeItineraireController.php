@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class EtapeItineraireController extends Controller
 {
-    
-public function index($itineraire_id)
-{
-    // Fetch the itinerary along with its associated steps
-    $itineraire = Itineraire::with('etapes')->findOrFail($itineraire_id);
-    
-    // Return the view for showing the itinerary and its steps
-    return view('etapes.index', compact('itineraire'));
-}
+    // Show all Etapes
+    public function index()
+    {
+        // Fetch all etapes with their related itineraires
+        $etapes = EtapeItineraire::with('itineraire')->get();
+        $itineraires = Itineraire::all();
 
+        // Return the index view with etapes data
+        return view('etapes.index', compact('etapes', 'itineraires'));
+    }
     public function show($id)
     {
         // Fetch the etape by ID
@@ -102,14 +102,14 @@ public function index($itineraire_id)
         // Redirect back with a success message
         return redirect()->route('etapes.index')->with('success', 'Étape supprimée avec succès !');
     }
+    // Front index method to show etapes for a specific itineraire
+public function frontIndex($itineraire_id)
+{
+    // Fetch the itinerary with its associated etapes
+    $itineraire = Itineraire::with('etapes')->findOrFail($itineraire_id);
 
-    public function frontIndex()
-    {  
-    // Fetch all etapes with their related itineraires
-    $etapes = EtapeItineraire::with('itineraire')->get();
-    
-    // Return the frontend index view with etapes data
-    return view('frontend.etape', compact('etapes'));
-    }
+    // Return the view for showing the itinerary and its steps
+    return view('frontend.etape', compact('itineraire'));
+}
 
 }
