@@ -96,10 +96,13 @@ class ItineraireController extends Controller
         $itineraire->delete();
         return redirect()->route('itineraires.index')->with('success', 'Itinéraire supprimé avec succès');
     }
-    public function showForClient()
+   public function showForClient()
 {
-    $itineraires = Itineraire::all();
-    $user=auth()->user();
+    // Fetch all itineraires with their related etapes
+    $itineraires = Itineraire::with('etapes')->get(); // Ensure you have the relationship defined in the Itineraire model
+    $user = auth()->user();
+
+    // Return the view with itineraires and user data
     return view('frontend.itineraires', compact('itineraires', 'user')); 
 }
 }

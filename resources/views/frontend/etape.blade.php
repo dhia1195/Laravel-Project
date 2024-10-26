@@ -1,8 +1,6 @@
 <x-layouts.base>
     {{-- Include the existing navbar --}}
     @include('layouts.navbars.guest.login') <!-- Adjust the path if needed -->
-
-    
     <!doctype html>
 <html lang="en">
 
@@ -54,62 +52,39 @@
       </div>
     </div>
   </div>
-  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-    <div class="container">
-        <div class="section text-center">
-            <h2 class="title mb-4">Itineraries</h2>
-            <div class="row">
-                @foreach($itineraires as $itineraire)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <a href="{{ route('itineraires.show', $itineraire->id) }}" class="text-decoration-none"> <!-- Added anchor tag -->
-                            <div class="card shadow-sm border-0">
-                                <img src="{{ asset('storage/' . $itineraire->image_url) }}" 
-                                     alt="{{ $itineraire->titre }}" 
-                                     class="card-img-top img-fluid rounded-top" 
-                                     style="height: 200px; object-fit: cover;">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $itineraire->titre }}</h5>
-                                    <p class="card-text">{{ Str::limit($itineraire->description, 100) }}</p>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Duree:</strong> {{ $itineraire->duree }}</li>
-                                        <li><strong>Prix:</strong> {{ $itineraire->prix }}</li>
-                                        <li><strong>Difficulte:</strong> {{ $itineraire->difficulte }}</li>
-                                        <li><strong>Impact Carbone:</strong> {{ $itineraire->impact_carbone }}</li>
-                                    </ul>
+    <div class="container my-5">
+        <!-- Add an empty div for spacing -->
+        <div style="height: 100px;"></div>
 
-                                    <!-- Display associated Etapes -->
-                                    @if($itineraire->etapes->isNotEmpty())
-                                        <h6>Étapes associées:</h6>
-                                        <ul class="list-unstyled">
-                                            @foreach($itineraire->etapes as $etape)
-                                                <li>{{ $etape->nom_etape }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p>Aucune étape associée.</p>
-                                    @endif
-                                </div>
-                            </div>
-                        </a> <!-- End of anchor tag -->
-                    </div>
-                @endforeach
+        <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">Explore Our Itinerary Steps</h1>
+        <p class="lead text-center text-muted mb-5">Discover the steps involved in our exciting itineraries.</p>
 
-                @if($itineraires->isEmpty())
-                    <div class="col-12">
-                        <div class="alert alert-warning text-center" role="alert">
-                            No itineraries found.
+        <div class="row"> 
+            @forelse ($etapes as $etape)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-lg" style="border: 1px solid #007bff;">
+                        <div class="card-body">
+                            <h5 class="card-title" style="color: #007bff; font-weight: bold;">{{ $etape->nom_etape }}</h5>
+                            <p class="card-text">{{ Str::limit($etape->description_etape, 100) }}</p>
+                            <ul class="list-unstyled">
+                                <li><strong>Order:</strong> {{ $etape->ordre_etape }}</li>
+                                <li><strong>Location:</strong> Lat {{ $etape->latitude }}, Long {{ $etape->longitude }}</li>
+                            </ul>
+                            <a href="{{ route('itineraires.show', $etape->itineraire->id) }}" class="btn" style="background-color: #007bff; color: white; border-radius: 5px;">View Itinerary</a>
                         </div>
                     </div>
-                @endif
-            </div>
-        </div>          
+                </div>
+            @empty
+                <div class="col-12">
+                    <div class="alert alert-info text-center">
+                        No itinerary steps found. Check back later!
+                    </div>
+                </div>
+            @endforelse
+        </div>
     </div>
-</div>
 
-
-</div>
-
-  </div>
+    </div>
   <footer class="footer pt-5 mt-5">
     <div class="container">
       <div class=" row">

@@ -102,4 +102,14 @@ class EtapeItineraireController extends Controller
         // Redirect back with a success message
         return redirect()->route('etapes.index')->with('success', 'Étape supprimée avec succès !');
     }
+
+    public function frontIndex()
+    {  
+    // Fetch all etapes with their related itineraires
+    $etapes = EtapeItineraire::with('itineraire')->get();
+    
+    // Return the frontend index view with etapes data
+    return view('frontend.etape', compact('etapes'));
+    }
+
 }
