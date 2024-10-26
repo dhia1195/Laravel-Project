@@ -45,8 +45,24 @@
       <div class="row">
         <div class="col-md-8 mx-auto">
           <div class="text-center">
-            <h1 class="text-white">Your title here</h1>
-            <h3 class="text-white">Subtitle</h3>
+          <h1 class="text-white font-weight-bold display-4 animate-title">Travel Trek</h1>
+<h3 class="text-white font-weight-light animate-subtitle">Your Journey, One Step at a Time</h3>
+<style>
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);}
+    100% {
+        opacity: 1;
+        transform: translateY(0);}}
+.animate-title {
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+.animate-subtitle {
+    animation: fadeInSlideUp 1.2s ease-out forwards;
+    animation-delay: 0.5s; }
+</style>
+
           </div>
         </div>
       </div>

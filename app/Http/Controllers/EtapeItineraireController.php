@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class EtapeItineraireController extends Controller
 {
-    // Show all Etapes
-    public function index()
-    {
-        // Fetch all etapes with their related itineraires
-        $etapes = EtapeItineraire::with('itineraire')->get();
-        $itineraires = Itineraire::all();
+    
+public function index($itineraire_id)
+{
+    // Fetch the itinerary along with its associated steps
+    $itineraire = Itineraire::with('etapes')->findOrFail($itineraire_id);
+    
+    // Return the view for showing the itinerary and its steps
+    return view('etapes.index', compact('itineraire'));
+}
 
-        // Return the index view with etapes data
-        return view('etapes.index', compact('etapes', 'itineraires'));
-    }
     public function show($id)
     {
         // Fetch the etape by ID

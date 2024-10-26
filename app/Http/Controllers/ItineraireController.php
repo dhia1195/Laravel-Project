@@ -17,8 +17,6 @@ class ItineraireController extends Controller
     
         return view('itineraires.index', compact('itineraires', 'search'));
     }
-    
-
 
     public function create()
     {
@@ -63,6 +61,8 @@ class ItineraireController extends Controller
 
     public function show(Itineraire $itineraire)
     {
+        $itineraire = Itineraire::with('etapes')->findOrFail($id);
+
         // Show a single itinerary
         return view('itineraires.show', compact('itineraire'));
     }
@@ -96,13 +96,10 @@ class ItineraireController extends Controller
         $itineraire->delete();
         return redirect()->route('itineraires.index')->with('success', 'Itinéraire supprimé avec succès');
     }
-   public function showForClient()
+    public function showForClient()
 {
-    // Fetch all itineraires with their related etapes
-    $itineraires = Itineraire::with('etapes')->get(); // Ensure you have the relationship defined in the Itineraire model
-    $user = auth()->user();
-
-    // Return the view with itineraires and user data
+    $itineraires = Itineraire::all();
+    $user=auth()->user();
     return view('frontend.itineraires', compact('itineraires', 'user')); 
 }
 }

@@ -41,7 +41,7 @@ Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-passwo
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
 Route::get('/itinerairesF', [ItineraireController::class, 'showForClient'])->name('itineraires.front');
 Route::get('/etapesF', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.front.index');
-Route::get('/itineraires/{id}', [ItineraireController::class, 'show'])->name('itineraires.show');
+Route::get('/etapes/itineraire/{itineraire_id}', [EtapeItineraireController::class, 'index'])->name('etapes.index');
 
 
 Route::middleware('auth')->group(function () {

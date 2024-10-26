@@ -47,8 +47,24 @@
       <div class="row">
         <div class="col-md-8 mx-auto">
           <div class="text-center">
-            <h1 class="text-white">Your title here</h1>
-            <h3 class="text-white">Subtitle</h3>
+          <h1 class="text-white font-weight-bold display-4 animate-title">Travel Trek</h1>
+<h3 class="text-white font-weight-light animate-subtitle">Your Journey, One Step at a Time</h3>
+<style>
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);}
+    100% {
+        opacity: 1;
+        transform: translateY(0);}}
+.animate-title {
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+.animate-subtitle {
+    animation: fadeInSlideUp 1.2s ease-out forwards;
+    animation-delay: 0.5s; }
+</style>
+
           </div>
         </div>
       </div>
@@ -61,36 +77,44 @@
             <div class="row">
                 @foreach($itineraires as $itineraire)
                     <div class="col-lg-4 col-md-6 mb-4">
-                        <a href="{{ route('itineraires.show', $itineraire->id) }}" class="text-decoration-none"> <!-- Added anchor tag -->
-                            <div class="card shadow-sm border-0">
-                                <img src="{{ asset('storage/' . $itineraire->image_url) }}" 
-                                     alt="{{ $itineraire->titre }}" 
-                                     class="card-img-top img-fluid rounded-top" 
-                                     style="height: 200px; object-fit: cover;">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $itineraire->titre }}</h5>
-                                    <p class="card-text">{{ Str::limit($itineraire->description, 100) }}</p>
-                                    <ul class="list-unstyled">
-                                        <li><strong>Duree:</strong> {{ $itineraire->duree }}</li>
-                                        <li><strong>Prix:</strong> {{ $itineraire->prix }}</li>
-                                        <li><strong>Difficulte:</strong> {{ $itineraire->difficulte }}</li>
-                                        <li><strong>Impact Carbone:</strong> {{ $itineraire->impact_carbone }}</li>
-                                    </ul>
+                        <div class="card shadow-sm border-0">
+                            <img src="{{ asset('storage/' . $itineraire->image_url) }}" 
+                                 alt="{{ $itineraire->titre }}" 
+                                 class="card-img-top img-fluid rounded-top" 
+                                 style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <!-- Link only on title -->
+                                <h5 class="card-title">
+                                    <a href="{{ route('itineraires.show', $itineraire->id) }}" class="text-decoration-none">
+                                        {{ $itineraire->titre }}
+                                    </a>
+                                </h5>
+                                <p class="card-text">{{ Str::limit($itineraire->description, 100) }}</p>
+                                <ul class="list-unstyled">
+                                    <li><strong>Duree:</strong> {{ $itineraire->duree }}</li>
+                                    <li><strong>Prix:</strong> {{ $itineraire->prix }}</li>
+                                    <li><strong>Difficulte:</strong> {{ $itineraire->difficulte }}</li>
+                                    <li><strong>Impact Carbone:</strong> {{ $itineraire->impact_carbone }}</li>
+                                </ul>
 
-                                    <!-- Display associated Etapes -->
-                                    @if($itineraire->etapes->isNotEmpty())
-                                        <h6>Étapes associées:</h6>
-                                        <ul class="list-unstyled">
-                                            @foreach($itineraire->etapes as $etape)
-                                                <li>{{ $etape->nom_etape }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p>Aucune étape associée.</p>
-                                    @endif
-                                </div>
+                                <!-- Display associated Etapes -->
+                                @if($itineraire->etapes->isNotEmpty())
+                                    <h6>Étapes associées:</h6>
+                                    <ul class="list-unstyled">
+                                        @foreach($itineraire->etapes as $etape)
+                                            <li>{{ $etape->nom_etape }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>Aucune étape associée.</p>
+                                @endif
+
+                                <!-- Button to show associated steps -->
+                                <a href="{{ route('etapes.index', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-primary mt-3">
+                                Voir Étapes Associées
+                                </a>
                             </div>
-                        </a> <!-- End of anchor tag -->
+                        </div>
                     </div>
                 @endforeach
 
@@ -105,7 +129,6 @@
         </div>          
     </div>
 </div>
-
 
 </div>
 
