@@ -17,6 +17,12 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-kit.css?v=3.0.0" rel="stylesheet" />
+  <!-- In the <head> section -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Before the closing </body> tag -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
 
 <body>
@@ -72,6 +78,12 @@
     <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">Etapes for Itineraire: {{ $itineraire->name }}</h1>
     <p class="lead text-center text-muted mb-5">{{ $itineraire->description }}</p>
 
+    <div class="container my-5">
+    <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">
+        Étapes pour Itinéraire: {{ $itineraire->name }}
+    </h1>
+    <p class="lead text-center text-muted mb-5">{{ $itineraire->description }}</p>
+
     <div class="row"> 
         @forelse ($itineraire->etapes as $etape)
             <div class="col-md-6 col-lg-4 mb-4">
@@ -83,29 +95,46 @@
                             <li><strong>Order:</strong> {{ $etape->ordre_etape }}</li>
                             <li><strong>Location:</strong> Lat {{ $etape->latitude }}, Long {{ $etape->longitude }}</li>
                         </ul>
+
+                        <!-- Map Container -->
+                        <div id="map-{{ $etape->id }}" style="height: 200px;"></div>
+
                         <a href="{{ route('itineraires.show', $itineraire->id) }}" class="btn" style="background-color: #007bff; color: white; border-radius: 5px;">View Itinerary</a>
                     </div>
                 </div>
+
+                <!-- Map Initialization Script -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var map = L.map('map-{{ $etape->id }}').setView([{{ $etape->latitude }}, {{ $etape->longitude }}], 13);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                        }).addTo(map);
+
+                        L.marker([{{ $etape->latitude }}, {{ $etape->longitude }}]).addTo(map)
+                            .bindPopup('<b>{{ $etape->nom_etape }}</b><br>Lat: {{ $etape->latitude }}, Long: {{ $etape->longitude }}')
+                            .openPopup();
+                    });
+                </script>
             </div>
         @empty
             <div class="col-12">
                 <div class="alert alert-info text-center">
-                    No steps found for this itinerary. Check back later!
+                    Aucune étape trouvée pour cet itinéraire. Revenez plus tard !
                 </div>
             </div>
         @endforelse
     </div>
 </div>
-</div>
 
-    </div>
+</div>
   <footer class="footer pt-5 mt-5">
     <div class="container">
       <div class=" row">
         <div class="col-md-3 mb-4 ms-auto">
           <div>
             <a href="https://www.creative-tim.com/product/material-kit">
-              <img src="./assets/img/logo-ct-dark.png" class="mb-3 footer-logo" alt="main_logo">
             </a>
             <h6 class="font-weight-bolder mb-4">Infinity</h6>
           </div>
