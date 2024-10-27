@@ -140,7 +140,7 @@ class ServiceHebergementController extends Controller
         $hebergement = Hebergement::with('servicehebs')->findOrFail($hebergement_id);
     
         // Return the view for showing the hebergement and its services
-        return view('frontend.etape', compact('hebergement')); // Pass only the hebergement
+        return view('frontheberg.serheber', compact('hebergement')); // Pass only the hebergement
     }
     
 }

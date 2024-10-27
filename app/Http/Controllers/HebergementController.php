@@ -133,7 +133,7 @@ class HebergementController extends Controller
     {
         $hebergements = Hebergement::all();
         $user=auth()->user();
-        return view('frontend.itineraires', compact('hebergements', 'user')); 
+        return view('frontheberg.hebergfront', compact('hebergements', 'user')); 
     }
     public function serviceHebergements()
     {
