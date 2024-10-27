@@ -41,7 +41,7 @@ class ReclamationController extends Controller
             // Add other fields as necessary
         ]);
 
-        return response()->json(['success' => 'Reclamation added successfully.']);
+        return redirect()->back()->with('success', 'Reclamation created successfully!');
     }
 
     // Show a specific reclamation

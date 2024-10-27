@@ -57,7 +57,7 @@
                                         <h6 class="mb-3 text-center text-md" style="color: #ff6347;">{{ $reclamation->titre }}</h6>
                                 </div>
 
-                                <span class="text-md">Nom: 
+                                <span class="text-md">Utilisateur: 
                                         <span class="text-dark ms-2 font-weight-bold">
                                                 {{ $reclamation->user->name }} <!-- Display user's name -->
                                         </span>
@@ -197,6 +197,69 @@
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="assets/js/soft-ui-dashboard.js"></script>
     @livewireScripts
+
+    <script>
+document.getElementById('createReclamationForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    let formData = new FormData(this);
+
+    fetch("{{ route('reclamations.store') }}", {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Close the modal
+            document.querySelector('#createReclamationModal .btn-close').click();
+
+            // Append the new reclamation to the list
+            let reclamationsList = document.querySelector('.list-group');
+            reclamationsList.innerHTML += `
+                <li class="list-group-item border-0 d-flex flex-column p-4 mb-2 bg-gray-100 border-radius-lg">
+                    <div class="d-flex flex-column">
+                        <h6 class="mb-3 text-center text-md" style="color: #ff6347;">${data.reclamation.titre}</h6>
+                    </div>
+                    <span class="text-md">Nom:
+                        <span class="text-dark ms-2 font-weight-bold">${data.reclamation.user.name}</span>
+                    </span>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="text-md">Description:
+                            <span class="text-dark ms-2 font-weight-bold">${data.reclamation.description}</span>
+                        </span>
+                        <div>
+                            <button type="button" class="btn btn-link text-dark mb-0" data-bs-toggle="modal" data-bs-target="#updateReclamationModal${data.reclamation.id}">
+                                <i class="fas fa-pencil-alt me-2" aria-hidden="true"></i>Edit
+                            </button>
+                            <form action="/reclamations/${data.reclamation.id}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-link text-danger text-gradient mb-0">
+                                    <i class="far fa-trash-alt me-2"></i>Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4 mb-1">
+                        <span class="text-xs">Date de création:
+                            <span class="text-dark ms-2 font-weight-bold">${data.reclamation.created_at}</span>
+                        </span>
+                        <span class="text-xs">Date de modification:
+                            <span class="text-dark ms-2 font-weight-bold">${data.reclamation.updated_at ?? 'N/A'}</span>
+                        </span>
+                    </div>
+                </li>
+            `;
+        }
+    })
+    .catch(error => console.error('Error:', error));
+});
+</script>
+
 </body>
 
 </html>

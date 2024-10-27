@@ -17,6 +17,7 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Controllers\ReclamationController;
+use App\Http\Controllers\ReservationController;
 
 use Illuminate\Http\Request;
 
@@ -54,5 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::resource('reclamations', ReclamationController::class);
+    Route::resource('reservations', ReservationController::class);
 });
 
