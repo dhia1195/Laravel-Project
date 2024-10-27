@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
 
+Route::get('/etapes/export-test', [EtapeItineraireController::class, 'exportEtapes'])->name('etapes.export');
 
 
 Route::middleware('auth')->group(function () {
@@ -92,7 +93,6 @@ Route::middleware('auth')->group(function () {
         Route::patch('/etapes/{id}', [EtapeItineraireController::class, 'update'])->name('etapes.update');
         Route::delete('/etapes/{id}', [EtapeItineraireController::class, 'destroy'])->name('etapes.destroy');
         Route::get('/avis', AvisC::class)->name('avis');
-
         Route::resource('transport', TransportController::class);
         Route::resource('transport_itineraires', TransportItineraireController::class);
         Route::put('transport_itineraires/{id}', [TransportItineraireController::class,'update'])->name('transport_itineraires.update');
