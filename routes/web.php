@@ -59,8 +59,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('/rtl', Rtl::class)->name('rtl');
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
-    Route::resource('reclamations', ReclamationController::class);
-    Route::resource('reservations', ReservationController::class);
 });
 
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
@@ -70,7 +68,7 @@ Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')
 
 Route::middleware('auth')->group(function () {
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
-
+    
     // Only admin can access the dashboard and admin-specific pages
     Route::middleware('role:admin')->group(function () {
         Route::get('/dashboard', Dashboard::class)->name('dashboard');
@@ -79,7 +77,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
         Route::get('/destination', DestinationC::class)->name('destination');
         Route::resource('itineraires', ItineraireController::class);
-
+        Route::resource('reclamations', ReclamationController::class);
+        Route::resource('reservations', ReservationController::class);
+        
         Route::resource('etapes', EtapeItineraireController::class);
         Route::get('/etapes', [EtapeItineraireController::class, 'index'])->name('etapes.index');
         Route::get('/etapes/create', [EtapeItineraireController::class, 'create'])->name('etapes.create');
@@ -95,8 +95,11 @@ Route::middleware('auth')->group(function () {
     // Only client can access client-specific pages
     Route::middleware('role:client')->group(function () {
         Route::get('/destinationFront', DestinationFront::class)->name('destination-front');
+        Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
         Route::get('/destinationFront/{id}', DestinationDetailF::class)->name('destination-detailF');
         Route::get('/itinerairesF', [ItineraireController::class, 'showForClient'])->name('itineraires.front');
+        Route::get('/reservationF', [ReservationController::class, 'showForClient'])->name('reservation.front');
+
         Route::get('/etapesF/{itineraire_id}', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.frontIndex');
     });
 

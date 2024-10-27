@@ -39,8 +39,33 @@ class ReservationController extends Controller
         ]);
 
         $validatedData['user_id'] = Auth::id();
+
+        $existingReservation = Reservation::where('itineraire_id', $request->itineraire_id)
+            ->where('user_id', auth()->id())
+            ->first();
+
+        if ($existingReservation) {
+            return redirect()->back()->withErrors(['message' => 'Vous avez déjà réservé cet itinéraire.']);
+        }
         $reservation = Reservation::create($validatedData);
-        return redirect()->route('reservations.index')->with('success', 'Itinerary created successfully!');
+        if ($request->input('source') === 'frontoffice') {
+            return redirect()->back()->with('success', 'Réservation confirmée !');
+        }
+        return redirect()->route('reservations.index')->with('success', 'Reservation created successfully!');
+    }
+
+    public function store2(Request $request)
+    {
+        $userId = Auth::check() ? Auth::id() : 1;
+        $validatedData = $request->validate([
+            'itineraire_id' => 'required|exists:itineraires,id',
+            'hebergement_id' => 'required|exists:hebergements,id',
+            'transport_id' => 'required|exists:transports,id',
+        ]);
+
+        $validatedData['user_id'] = Auth::id();
+        $reservation = Reservation::create($validatedData);
+        return response()->json($reservation);
     }
 
     // Show a specific reservation
@@ -85,6 +110,17 @@ class ReservationController extends Controller
 
         $reservation->delete();
         return redirect()->route('reservations.index')->with('success', 'Reclamation deleted successfully.');
+    }
+
+    public function showForClient()
+    {
+        $userId = auth()->id(); // Get the authenticated user ID
+        $reservations = Reservation::where('user_id', $userId)->get();
+        $itineraires = Itineraire::all(); // Assuming Itineraire is your model
+        $hebergements = hebergement::all(); // Assuming Hebergement is your model
+        $transports = Transport::all();
+        return view('reservations.index', compact('reservations', 'itineraires', 'hebergements', 'transports'));
+        //return view('frontend.reservation', compact('reservations'));
     }
 
 }

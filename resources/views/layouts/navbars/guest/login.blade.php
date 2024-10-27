@@ -30,8 +30,14 @@ Infinity        </a>
 </li>
 
 <li class="nav-item">
+    <a class="nav-link text-dark me-2" href="{{ route('reservation.front') }}">
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reservations
+                 </a>
+ </li>
+
+<li class="nav-item">
     <a class="nav-link text-dark me-2" href="{{ route('reclamation.front') }}">
-           <i class="fas fa-home opacity-6 text-dark me-1"></i> Reclamation
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reclamation
                  </a>
  </li>
 
