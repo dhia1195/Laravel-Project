@@ -63,6 +63,18 @@
         .animate-subtitle {
             animation: fadeInSlideUp 1.2s ease-out forwards;
             animation-delay: 0.5s; }
+
+            .form-control {
+                border: 1px solid #ced4da; /* Bootstrap's default border color */
+                border-radius: .25rem; /* Optional: same as Bootstrap default */
+                box-shadow: none; /* Optional: remove box-shadow if you want a flat look */
+            }
+
+            .form-control:focus {
+                border-color: #80bdff; /* Bootstrap's focus border color */
+                outline: 0; /* Remove outline */
+                box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25); /* Bootstrap's focus shadow */
+            }
         </style>
 
                 </div>
@@ -72,7 +84,7 @@
         </div>
 
     <div class="container my-4">
-        <h2 class="text-center">Add a Reclamation</h2>
+        <h2 class="text-center">Ajouter une Reclamation</h2>
 
         <!-- Display Validation Errors -->
         @if ($errors->any())
@@ -99,7 +111,7 @@
                 <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Reclamation</button>
+            <button type="submit" class="btn btn-primary">Confirmer</button>
         </form>
     </div>
     <footer class="footer pt-5 mt-5">

@@ -9,6 +9,8 @@ use App\Models\hebergement;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+
 class ReservationController extends Controller
 {
     // Retrieve and display all reservations
@@ -29,15 +31,16 @@ class ReservationController extends Controller
     // Store a new reservation
     public function store(Request $request)
     {
+        $userId = Auth::check() ? Auth::id() : 1;
         $validatedData = $request->validate([
             'itineraire_id' => 'required|exists:itineraires,id',
             'hebergement_id' => 'required|exists:hebergements,id',
             'transport_id' => 'required|exists:transports,id',
-            'user_id' => 'required|exists:users,id',
         ]);
 
+        $validatedData['user_id'] = Auth::id();
         $reservation = Reservation::create($validatedData);
-        return redirect()->back()->with('success', 'Reservation created successfully!');
+        return redirect()->route('reservations.index')->with('success', 'Itinerary created successfully!');
     }
 
     // Show a specific reservation
@@ -65,9 +68,8 @@ class ReservationController extends Controller
             'itineraire_id' => 'sometimes|exists:itineraires,id',
             'hebergement_id' => 'sometimes|exists:hebergements,id',
             'transport_id' => 'sometimes|exists:transports,id',
-            'user_id' => 'sometimes|exists:users,id',
         ]);
-
+        $validatedData['user_id'] = Auth::id();
         $reservation->update($validatedData);
         return redirect()->route('reservations.index')->with('success', 'Reclamation updated successfully.');
     }

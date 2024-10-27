@@ -7,7 +7,7 @@
             {{ $slot }}
             @include('layouts.footers.guest.with-socials')
             {{-- If the user is authenticated on the static sign in or the login page --}}
-        @elseif (in_array(request()->route()->getName(),['sign-in', 'login'],))
+        @elseif (in_array(request()->route()->getName(),['sign-in', 'login','destination-front','destination-detailF'],))
             @include('layouts.navbars.guest.login')
             {{ $slot }}
             @include('layouts.footers.guest.description')
@@ -53,6 +53,12 @@
                 {{ $slot }}
                 @include('layouts.footers.guest.with-socials')
             </div>
+            {{-- @elseif (!auth()->check() && in_array(request()->route()->getName(),['destination-front'],))
+            <div>
+                @include('layouts.navbars.guest.login')
+                {{ $slot }}
+                @include('layouts.footers.guest.with-socials')
+            </div> --}}
         @endif
     @endguest
 

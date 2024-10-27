@@ -19,11 +19,17 @@ class Itineraire extends Model
         'difficulte',
         'impact_carbone',
         'image_url',
+        'destination_id',
     ];
 
     // Relation avec EtapeItineraire
     public function etapes()
     {
         return $this->hasMany(EtapeItineraire::class);
+    }
+    // Relation avec Itineraire
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class);
     }
 }

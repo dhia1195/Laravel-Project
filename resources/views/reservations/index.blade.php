@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Reservation Management</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/soft-ui-dashboard.css?v=1" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-</head>
-<body class="g-sidenav-show bg-gray-100">
-@include('layouts.navbars.auth.sidebar')
-@include('layouts.navbars.auth.nav')
+<x-layouts.app>
 
 <div class="my-4 mx-4">
     <!-- Button to open the create reservation modal -->
@@ -96,7 +83,7 @@
 <div class="modal fade" id="createReservationModal" tabindex="-1" aria-labelledby="createReservationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('reservations.store') }}" method="POST">
+            <form action="{{ route('reservations.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title">Add Reservation</h5>
@@ -130,10 +117,4 @@
         </div>
     </div>
 </div>
-
-<!-- Core JS Files -->
-<script src="assets/js/core/popper.min.js"></script>
-<script src="assets/js/core/bootstrap.min.js"></script>
-<script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
-</body>
-</html>
+</x-layouts.app>

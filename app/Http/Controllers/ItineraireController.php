@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Itineraire; // Add this line if you are using the Itineraire model
-
+use App\Models\Destination;
+use Illuminate\Support\Facades\Log;
 class ItineraireController extends Controller
 {
     public function index(Request $request)
@@ -20,12 +21,15 @@ class ItineraireController extends Controller
 
     public function create()
     {
+       
+        $destinations = Destination::all();
         // Show form for creating a new itinerary
-        return view('itineraires.create');
+        return view('itineraires.create',compact('destinations'));
     }
 
     public function store(Request $request)
     {
+       try{
         // Validate the request
         $request->validate([
             'titre' => 'required|string|max:255',
@@ -35,6 +39,7 @@ class ItineraireController extends Controller
             'difficulte' => 'required|string',
             'impact_carbone' => 'required|numeric',
             'image_url' => 'nullable|image|max:2048', // Validate that the file is an image
+            'destination_id' => 'required'
         ]);
     
         // Handle the image upload
@@ -53,13 +58,31 @@ class ItineraireController extends Controller
             'difficulte' => $request->difficulte,
             'impact_carbone' => $request->impact_carbone,
             'image_url' => $imagePath, // Save the image path
+            'destination_id' => $request->destination_id
         ]);
+     } catch (\Exception $e) {
+            // Emit an event with error data
+            Log::error("Error submitting review", [
+                'error' => $e->getMessage(),
+                'titre' => $request->titre,
+            'description' => $request->description,
+            'duree' => $request->duree,
+            'prix' => $request->prix,
+            'difficulte' => $request->difficulte,
+            'impact_carbone' => $request->impact_carbone,
+             
+            'destination_id' => $request->destination_id
+            ]);
+            
+            
+            session()->flash('error', 'There was an error submitting your review. Please try again.');
+        }
     
         return redirect()->route('itineraires.index')->with('success', 'Itinerary created successfully!');
     }
     
 
-    public function show(Itineraire $itineraire)
+    public function show( $id)
     {
         $itineraire = Itineraire::with('etapes')->findOrFail($id);
 

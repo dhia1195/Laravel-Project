@@ -5,7 +5,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
             <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="...">
-            <span class="ms-3 font-weight-bold">Soft UI Dashboard Laravel Livewire</span>
+            <span class="ms-3 font-weight-bold">Infinity</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -38,11 +38,145 @@
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
+
+
+                <a class="nav-link {{ Route::currentRouteName() == 'destination' ? 'active' : '' }}"
+                    href="{{ route('destination') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Rounded-Icons" transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
+                                    <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
+                                        <g id="shop-" transform="translate(0.000000, 148.000000)">
+                                            <path class="color-background"
+                                                d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"
+                                                id="Path" opacity="0.598981585"></path>
+                                            <path class="color-background"
+                                                d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"
+                                                id="Path"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Destination</span>
+                </a>
             </li>
 
-            <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Route::currentRouteName() == 'avis' ? 'active' : '' }}"
+                    href="{{ route('avis') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Rounded-Icons" transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
+                                    <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
+                                        <g id="shop-" transform="translate(0.000000, 148.000000)">
+                                            <path class="color-background"
+                                                d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"
+                                                id="Path" opacity="0.598981585"></path>
+                                            <path class="color-background"
+                                                d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"
+                                                id="Path"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Avis</span>
+                </a>
             </li>
+
+            <li class="nav-item">
+    <button class="nav-link dropdown-btn">
+        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-3">
+            <svg class="dropdown-icon" width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L10 12l-8 2 10 10 2-8 8-2L12 2z" fill="currentColor" />
+            </svg>
+        </div>
+        <span class="nav-link-text">Itinéraires</span>
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container" id="itinerairesMenu">
+        <a class="dropdown-item {{ Route::currentRouteName() == 'itineraires.index' ? 'active' : '' }}" href="{{ route('itineraires.index') }}">
+            Itinéraires
+        </a>
+        <a class="dropdown-item" href="{{ route('etapes.index') }}">
+    Étapes
+</a>
+
+    </div>
+</li>
+
+<style>/* Dropdown container styling */
+#itinerairesMenu {
+    display: none;
+    padding-left: 15px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #007bff; /* Small visual indicator */
+    border-radius: 5px;
+    list-style: none;
+    margin-top: 5px;
+}
+
+.nav-item {
+    position: relative;
+    display: block;
+    margin-bottom: 0; /* No extra space between items */
+}
+
+/* Show the dropdown container when the class is toggled */
+#itinerairesMenu.show {
+    display: block;
+}
+
+/* Button styling */
+.dropdown-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align icon to the right */
+}
+
+/* Dropdown items styling */
+.dropdown-item {
+    padding: 8px 20px;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+/* Rotate icon when dropdown is open */
+.dropdown-icon.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+</style>
+<script>document.querySelector('.dropdown-btn').addEventListener('click', function() {
+    var dropdownMenu = document.getElementById('itinerairesMenu');
+    dropdownMenu.classList.toggle('show');
+    this.querySelector('.dropdown-icon').classList.toggle('rotate');
+});
+</script>            
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-profile' ? 'active' : '' }}"
                     href="{{ route('user-profile') }}">
@@ -90,6 +224,14 @@
                         <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center {{ in_array(request()->route()->getName(), ['reservations.index']) ? 'text-white' : 'text-dark' }}"></i>
                     </div>
                     <span class="nav-link-text ms-1">Reservations</span>
+                <a class="nav-link {{ Route::currentRouteName() == 'user-management' ? 'active' : '' }}"
+                    href="{{ route('user-management') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center
+                        {{ in_array(request()->route()->getName(),['user-management']) ? 'text-white' : 'text-dark' }}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
 
@@ -275,11 +417,7 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li>
-            <li class="nav-link mb-0">
-                <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel-livewire"
-                    class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
-                    Upgrade to PRO</a>
-            </li>
+           
         </ul>
     </div>
     <div class="sidenav-footer mx-3 mt-3 pt-3">
@@ -295,8 +433,7 @@
                 <div class="docs-info">
                     <h6 class="text-white up mb-0">Need help?</h6>
                     <p class="text-xs font-weight-bold">Please check our docs</p>
-                    <a href="/documentation/bootstrap/overview/soft-ui-dashboard/index.html" target="_blank"
-                        class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
+                   
                 </div>
             </div>
         </div>
