@@ -96,6 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:client')->group(function () {
         Route::get('/destinationFront', DestinationFront::class)->name('destination-front');
         Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+        Route::post('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
         Route::get('/destinationFront/{id}', DestinationDetailF::class)->name('destination-detailF');
         Route::get('/itinerairesF', [ItineraireController::class, 'showForClient'])->name('itineraires.front');
         Route::get('/reservationF', [ReservationController::class, 'showForClient'])->name('reservation.front');
