@@ -106,9 +106,6 @@
                                     <i class="far fa-trash-alt me-2"></i>Delete
                                 </button>
                             </form>
-                            <button type="button" class="btn btn-link text-dark mb-0" data-bs-toggle="modal" data-bs-target="#updateReservationModal{{ $reservation->id }}">
-                                <i class="fas fa-pencil-alt me-2"></i>Edit
-                            </button>
                         </div>
                     </li>
                     @endforeach

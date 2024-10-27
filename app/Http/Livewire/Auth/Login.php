@@ -29,7 +29,7 @@ class Login extends Component
             $user = User::where(["email" => $this->email])->first();
             auth()->login($user, $this->remember_me);
              if($user->role =='client'){
-                return redirect()->intended('/itinerairesF');  
+                return redirect()->intended('/destinationFront');  
              }
              
             return redirect()->intended('/dashboard');        
