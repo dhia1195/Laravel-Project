@@ -25,6 +25,10 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\ReservationController;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TransportItineraireController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +93,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/etapes/{id}', [EtapeItineraireController::class, 'destroy'])->name('etapes.destroy');
         Route::get('/avis', AvisC::class)->name('avis');
 
+        Route::resource('transport', TransportController::class);
+        Route::resource('transport_itineraires', TransportItineraireController::class);
+        Route::put('transport_itineraires/{id}', [TransportItineraireController::class,'update'])->name('transport_itineraires.update');
+
 
     });
 
@@ -102,6 +110,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/reservationF', [ReservationController::class, 'showForClient'])->name('reservation.front');
 
         Route::get('/etapesF/{itineraire_id}', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.frontIndex');
+        Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
+        Route::get('/frontdetails/{id}', [TransportItineraireController::class, 'frontIndex'])->name('frontTransport.showFront');
     });
 
     // Accessible to all authenticated users
