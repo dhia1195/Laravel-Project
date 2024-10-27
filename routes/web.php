@@ -18,6 +18,8 @@ use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Controllers\HebergementController;
 
+use App\Http\Controllers\ServiceHebergementController;
+
 use Illuminate\Http\Request;
 
 /*
@@ -41,6 +43,8 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 
 Route::get('/reset-password/{id}',ResetPassword::class)->name('reset-password')->middleware('signed');
+Route::get('/itinerairesF', [HebergementController::class, 'showForHebergement'])->name('itineraires.front');
+Route::get('/etapesF/{itineraire_id}', [ServiceHebergementController::class, 'frontIndex'])->name('etapes.frontIndex');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
@@ -55,6 +59,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('hebergements', HebergementController::class);
     Route::put('/hebergements/{id}', [HebergementController::class, 'update'])->name('hebergements.update');
+
+    Route::resource('services_hebergement', ServiceHebergementController::class);
+    Route::put('/services_hebergement/{id}', [ServiceController::class, 'update'])->name('services_hebergement.update');
+
 
 });
 

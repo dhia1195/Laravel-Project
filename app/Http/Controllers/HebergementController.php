@@ -129,4 +129,15 @@ class HebergementController extends Controller
         // Rediriger vers la liste des hébergements avec un message de succès
         return redirect()->route('hebergements.index')->with('success', 'Hébergement supprimé avec succès.');
     }
+    public function showForHebergement()
+    {
+        $hebergements = Hebergement::all();
+        $user=auth()->user();
+        return view('frontend.itineraires', compact('hebergements', 'user')); 
+    }
+    public function serviceHebergements()
+    {
+        return $this->hasMany(ServiceHebergement::class, 'hebergement_id');
+    }
 }
+
