@@ -21,7 +21,11 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Mail;
 
+use App\Http\Controllers\HebergementController;
+
+use App\Http\Controllers\ServiceHebergementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +68,14 @@ Route::middleware('auth')->group(function () {
         Route::patch('/etapes/{id}', [EtapeItineraireController::class, 'update'])->name('etapes.update');
         Route::delete('/etapes/{id}', [EtapeItineraireController::class, 'destroy'])->name('etapes.destroy');
         Route::get('/avis', AvisC::class)->name('avis');
+        
+    Route::resource('hebergements', HebergementController::class);
+    Route::put('/hebergements/{id}', [HebergementController::class, 'update'])->name('hebergements.update');
+
+    Route::resource('services_hebergement', ServiceHebergementController::class);
+    Route::put('/services_hebergement/{id}', [ServiceController::class, 'update'])->name('services_hebergement.update');
+
+
 
 
     });
@@ -74,6 +86,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/destinationFront/{id}', DestinationDetailF::class)->name('destination-detailF');
         Route::get('/itinerairesF', [ItineraireController::class, 'showForClient'])->name('itineraires.front');
         Route::get('/etapesF/{itineraire_id}', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.frontIndex');
+        
+Route::get('/heber', [HebergementController::class, 'showForHebergement'])->name('frontheberg.hebergfront');
+Route::get('/serv/{id}', [ServiceHebergementController::class, 'frontIndex'])->name('frontheberg.serheber');
+
+
     });
 
     // Accessible to all authenticated users
