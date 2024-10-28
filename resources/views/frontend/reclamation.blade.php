@@ -103,12 +103,18 @@
 
             <div class="mb-3">
                 <label for="titre" class="form-label">Titre</label>
-                <input type="text" class="form-control" id="titre" name="titre" required>
+                <input type="text" class="form-control @error('titre') is-invalid @enderror" name="titre" value="{{ old('titre') }}" required>
+    @error('titre')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror  
             </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
+    @error('description')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror 
             </div>
 
             <button type="submit" class="btn btn-primary">Confirmer</button>

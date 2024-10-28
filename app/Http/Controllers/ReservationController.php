@@ -49,7 +49,7 @@ class ReservationController extends Controller
         }
         $reservation = Reservation::create($validatedData);
         if ($request->input('source') === 'frontoffice') {
-            return redirect()->back()->with('success', 'Réservation confirmée !');
+            return redirect()->route('reservation.front')->with('success', 'Reservation created successfully!');
         }
         return redirect()->route('reservations.index')->with('success', 'Reservation created successfully!');
     }
