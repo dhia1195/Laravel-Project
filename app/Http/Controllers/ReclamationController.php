@@ -60,8 +60,8 @@ class ReclamationController extends Controller
     public function update(Request $request, Reclamation $reclamation)
     {
         $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
+            'titre' => 'required|string|max:50',
+            'description' => 'required|string|min:10|max:1000',
             // Add other validation rules as needed
         ]);
 
