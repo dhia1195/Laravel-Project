@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_hebergements', function (Blueprint $table) {
+        Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('itineraire_id')->constrained('itineraires')->onDelete('cascade');
             $table->foreignId('hebergement_id')->constrained('hebergements')->onDelete('cascade');
-            $table->string('service_nom');
-            $table->text('description');
-            $table->boolean('disponibilite'); // boolean as per validation
-            $table->decimal('prix_service', 8, 2); // matches validation 'prix_service'
+            $table->foreignId('transport_id')->constrained('transports')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_hebergements');
+        Schema::dropIfExists('reservations');
     }
 };

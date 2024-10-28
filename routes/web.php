@@ -18,7 +18,8 @@ use App\Http\Livewire\Tables;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
-
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TransportItineraireController;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Controllers\ReclamationController;
