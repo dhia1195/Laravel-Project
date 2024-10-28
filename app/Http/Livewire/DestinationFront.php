@@ -8,8 +8,10 @@ use App\Models\Avis;
 use Illuminate\Support\Facades\Log;
 class DestinationFront extends Component
 {
-    public $destinations, $commentaire,$note,$destination_id;
+    public $destinations,$destination_id;
     public $selectedDestination = null;
+    public $commentaire = [];
+    public $note = [];
    
 
     
@@ -38,7 +40,7 @@ class DestinationFront extends Component
     public function store($destinationId)
     {
         try {
-        $this->validate([
+            $validatedData =$this->validate([
             'commentaire' => 'required',
             'note' => 'required',
         ]);
@@ -46,14 +48,14 @@ class DestinationFront extends Component
         Avis::create([
             'user_id' => auth()->user()->id, // Make sure the user is authenticated
             'destination_id' => $destinationId,
-            'commentaire' => $this->commentaire,
-            'note' => (int)$this->note,
+            'commentaire' => $validatedData["commentaire"][$destinationId],
+            'note' => (int)$validatedData["note"][$destinationId],
             'date'=> now()
         ]);
 
         // Reset form fields
         $this->resetFields();
-
+       
         // Optionally, emit an event or set a session flash message
         // session()->flash('message', 'Review submitted successfully.');
     } catch (\Exception $e) {

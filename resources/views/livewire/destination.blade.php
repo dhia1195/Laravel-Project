@@ -46,6 +46,13 @@
             <hr>
 
             <h3 class="mt-4">Destinations List</h3>
+            <form wire:submit.prevent="searchD" class="mb-3">
+                <div class="input-group">
+                    <input type="text" wire:model="search" class="form-control" placeholder="Search by nom" aria-label="Search by nom">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
+        
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -74,6 +81,23 @@
                                             @endphp
 
                                         </div>
+                                        <h1>Import Destinations</h1>
+
+                                        @if (session()->has('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
+                                    
+                                        @if (session()->has('message'))
+                                        <div class="alert alert-success">{{ session('message') }}</div>
+                                    @endif
+                                
+                                    <form wire:submit.prevent="import">
+                                        <input type="file" wire:model="file">
+                                        @error('csvFile') <span class="error">{{ $message }}</span> @enderror
+                                        <button type="submit">Upload and Import</button>
+                                    </form>
                                        
                                         @if(count($destinations) === 0)
                                         <tr>

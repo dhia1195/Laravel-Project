@@ -70,7 +70,6 @@ class ItineraireController extends Controller
             'prix' => $request->prix,
             'difficulte' => $request->difficulte,
             'impact_carbone' => $request->impact_carbone,
-             
             'destination_id' => $request->destination_id
             ]);
             
