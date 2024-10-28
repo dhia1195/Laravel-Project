@@ -43,7 +43,7 @@
                     <div class="col-md-8 mx-auto">
                         <div class="text-center">
                             <h1 class="text-white font-weight-bold display-4 animate-title">{{ $hebergement->servicehebs->first()->service_nom ?? 'No Service' }}</h1>
-                            <h3 class="text-white font-weight-light animate-subtitle">Explore the Details of Our Accommodation Service</h3>
+                            <h3 class="text-white font-weight-light animate-subtitle">y a pas de service a cet hebergement</h3>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
         <!-- Service Details Section -->
         <div class="container my-5">
             <h1 class="display-4 text-center mb-4" style="color: #007bff; text-shadow: 2px 2px #e1e1e1;">
-                Service Details for {{ $hebergement->servicehebs->first()->service_nom ?? 'No Service' }}
+                Service Details for {{ $hebergement->servicehebs->first()->service_nom ?? ' hebergement' }}
             </h1>
             <p class="lead text-center text-muted mb-5">{{ $hebergement->servicehebs->first()->description ?? 'No description available.' }}</p>
 

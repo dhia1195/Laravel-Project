@@ -57,7 +57,7 @@ class ServiceHebergementController extends Controller
         'description' => $validated['description'] ?? null,
         'disponibilite' => $validated['disponibilite'],
         'prix_service' => $validated['prix_service'] ?? 0,
-    ]);
+    ]); 
 
     // Envoi de l'email avec l'instance de ServiceHebergement
     Mail::to('yosraba90@gmail.com')->send(new HelloMail($serviceHebergement));

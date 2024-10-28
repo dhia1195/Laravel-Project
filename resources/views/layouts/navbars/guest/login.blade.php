@@ -34,6 +34,12 @@ Infinity        </a>
     <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reservations
                  </a>
  </li>
+ 
+<li class="nav-item">
+    <a class="nav-link text-dark me-2" href="{{ route('frontheberg.hebergfront') }}">
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Hebergements
+                 </a>
+ </li>
 
 <li class="nav-item">
     <a class="nav-link text-dark me-2" href="{{ route('reclamation.front') }}">
