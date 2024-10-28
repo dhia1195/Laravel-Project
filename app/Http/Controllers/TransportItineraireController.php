@@ -6,60 +6,50 @@ use App\Models\TransportItineraire;
 use App\Models\Transport;
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;  // Import Mail facade
+use App\Mail\HelloMail;  // Import HelloMail class
 
 class TransportItineraireController extends Controller
 {
-    /**
-     * Affiche la liste des transports itinéraires.
-     */
     public function index()
     {
         $transportItineraires = TransportItineraire::with('transport')->get();
-        $transports =Transport ::all();
-        $destinations =Destination ::all();
-        return view('transport_itineraire.index', compact('transportItineraires','transports','destinations'));
+        $transports = Transport::all();
+        $destinations = Destination::all();
+        return view('transport_itineraire.index', compact('transportItineraires', 'transports', 'destinations'));
     }
 
-    /**
-     * Affiche le formulaire de création.
-     */
     public function create()
     {
         $transports = Transport::all();
-        $destinations =Destination ::all();
-        return view('transport_itineraire.create', compact('transports','destinations'));
+        $destinations = Destination::all();
+        return view('transport_itineraire.create', compact('transports', 'destinations'));
     }
 
-    /**
-     * Enregistre un nouveau transport itinéraire.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'destination_id' => 'required|integer|exists:destination,id',
             'transport_id' => 'required|integer|exists:transports,id',
-            'distance' => 'required|numeric',
-            'duree' => 'required|numeric',
+            'distance' => 'required|numeric|min:0',
+            'duree' => 'required|numeric|min:0',
         ]);
 
-        TransportItineraire::create($validated);
+        $transportItineraire = TransportItineraire::create($validatedData);
+
+        // Send an email with the newly created itinerary
+        Mail::to('yosraba90@gmail.com')->send(new HelloMail($transportItineraire));
 
         return redirect()->route('transport_itineraires.index')
                          ->with('success', 'Transport itinéraire ajouté avec succès.');
     }
 
-    /**
-     * Affiche les détails d'un transport itinéraire.
-     */
     public function show($id)
     {
         $transportItineraire = TransportItineraire::with('transport')->findOrFail($id);
         return view('transport_itineraire.show', compact('transportItineraire'));
     }
 
-    /**
-     * Affiche le formulaire d'édition d'un transport itinéraire.
-     */
     public function edit($id)
     {
         $transportItineraire = TransportItineraire::findOrFail($id);
@@ -67,16 +57,13 @@ class TransportItineraireController extends Controller
         return view('transport_itineraires.edit', compact('transportItineraire', 'transports'));
     }
 
-    /**
-     * Met à jour un transport itinéraire.
-     */
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'destination_id' => 'required|integer|exists:destination,id',
             'transport_id' => 'required|integer|exists:transports,id',
-            'distance' => 'required|numeric',
-            'duree' => 'required|numeric',
+            'distance' => 'required|numeric|min:0',
+            'duree' => 'required|numeric|max:50',
         ]);
 
         $transportItineraire = TransportItineraire::findOrFail($id);
@@ -86,9 +73,6 @@ class TransportItineraireController extends Controller
                          ->with('success', 'Transport itinéraire mis à jour avec succès.');
     }
 
-    /**
-     * Supprime un transport itinéraire.
-     */
     public function destroy($id)
     {
         $transportItineraire = TransportItineraire::findOrFail($id);
@@ -97,10 +81,10 @@ class TransportItineraireController extends Controller
         return redirect()->route('transport_itineraires.index')
                          ->with('success', 'Transport itinéraire supprimé avec succès.');
     }
+
     public function frontIndex($transport_id)
     {
-    $transport = Transport::with('transportit')->findOrFail($transport_id); 
-    return view('frontTransport.showFront', compact('transport')); 
-    }  
-
+        $transport = Transport::with('transportit')->findOrFail($transport_id);
+        return view('frontTransport.showFront', compact('transport'));
+    }
 }

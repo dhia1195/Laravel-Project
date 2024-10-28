@@ -10,16 +10,16 @@ class HelloMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $serviceHebergement;
+    public $transportItineraire;
 
-    public function __construct($serviceHebergement)
+    public function __construct($transportItineraire)
     {
-        $this->serviceHebergement = $serviceHebergement;
+        $this->transportItineraire = $transportItineraire;
     }
 
     public function build()
     {
-        return $this->view('services_hebergement.hello')
-                    ->with(['serviceHebergement' => $this->serviceHebergement]);
+        return $this->view('transport_itineraire.hello')
+                    ->with(['transportItineraire' => $this->transportItineraire]);
     }
 }

@@ -94,6 +94,8 @@
                                             <li><strong>Prix:</strong> {{ $transport->prix_trans }} €</li>
                                             <li><strong>Impact carbone:</strong> {{ $transport->impact_carbone }}</li>
                                         </ul>
+                                        <a href="{{ route('frontTransport.showFront', ['id' => $transport->id]) }}" class="btn btn-primary">Details</a>
+
                                     </div>
                                 </div>
                             </div>

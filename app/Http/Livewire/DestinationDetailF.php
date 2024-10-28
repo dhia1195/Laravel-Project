@@ -26,7 +26,7 @@ class DestinationDetailF extends Component
 
     public function loadDestination()
     {
-        $this->selectedDestination = Destination::with('itineraire')->findOrFail($this->id);
+        $this->selectedDestination = Destination::with('itineraire','transDestination')->findOrFail($this->id);
         $this->userReservations = Reservation::where('user_id', auth()->id())
         ->whereIn('itineraire_id', $this->selectedDestination->itineraire->pluck('id'))
         ->get();

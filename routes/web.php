@@ -30,6 +30,9 @@ use App\Http\Controllers\Mail;
 use App\Http\Controllers\HebergementController;
 
 use App\Http\Controllers\ServiceHebergementController;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TransportItineraireController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -124,6 +127,9 @@ Route::middleware('auth')->group(function () {
         
 Route::get('/heber', [HebergementController::class, 'showForHebergement'])->name('frontheberg.hebergfront');
 Route::get('/serv/{id}', [ServiceHebergementController::class, 'frontIndex'])->name('frontheberg.serheber');
+
+Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
+Route::get('/frontdetails/{id}', [TransportItineraireController::class, 'frontIndex'])->name('frontTransport.showFront');
 
 
     });
