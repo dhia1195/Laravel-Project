@@ -1,6 +1,10 @@
 <x-layouts.app>
     <div class="container mt-5">
         <h1 class="mb-4">Liste des Services</h1>
+
+        <!-- Statistics Display -->
+       
+
         <a href="{{ route('services_hebergement.create') }}" class="btn btn-success mb-3">Ajouter un Service</a>
         
         <table class="table table-bordered">
@@ -95,16 +99,16 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-    <label for="hebergement_id" class="form-label">Hébergement :</label>
-    <select name="hebergement_id" id="hebergement_id" class="form-select" required>
-        <option value="">Sélectionnez un hébergement</option>
-        @foreach ($hebergements as $hebergement)
-            <option value="{{ $hebergement->id }}" {{ $service->hebergement_id == $hebergement->id ? 'selected' : '' }}>
-                {{ $hebergement->nom }} 
-            </option>
-        @endforeach
-    </select>
-</div>
+                                            <label for="hebergement_id" class="form-label">Hébergement :</label>
+                                            <select name="hebergement_id" id="hebergement_id" class="form-select" required>
+                                                <option value="">Sélectionnez un hébergement</option>
+                                                @foreach ($hebergements as $hebergement)
+                                                    <option value="{{ $hebergement->id }}" {{ $service->hebergement_id == $hebergement->id ? 'selected' : '' }}>
+                                                        {{ $hebergement->nom }} 
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
                                         <div class="mb-3">
                                             <label for="service_nom" class="form-label">Nom du service :</label>
@@ -134,5 +138,39 @@
                 @endforeach
             </tbody>
         </table>
+
+        <!-- Pie Chart -->
+        <div class="mb-4" style="max-width: 400px; margin: auto;"> <!-- Set max-width for the chart container -->
+            <canvas id="availabilityChart" width="400" height="400"></canvas> <!-- Set width and height -->
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('availabilityChart').getContext('2d');
+        const availabilityChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Disponible', 'Non disponible'],
+                datasets: [{
+                    label: 'Services Disponibilité',
+                    data: [{{ $availableServices }}, {{ $unavailableServices }}],
+                    backgroundColor: ['#36A2EB', '#FF6384'],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Statistiques de Disponibilité des Services'
+                    }
+                }
+            }
+        });
+    </script>
 </x-layouts.app>

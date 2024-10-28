@@ -12,10 +12,19 @@ class HebergementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $hebergements = Hebergement::all();
-        return view('hebergements.index', compact('hebergements'));
-    }
+    public function index(Request $request)
+{
+    // Get the search query from the request
+    $search = $request->input('search');
+
+    // Fetch all hebergements, filtered by 'nom' if search query exists
+    $hebergements = Hebergement::when($search, function($query, $search) {
+        return $query->where('nom', 'LIKE', "%{$search}%");
+    })->orderBy('nom')->paginate(3); // Changed to 3 for your requirement
+
+    return view('hebergements.index', compact('hebergements', 'search'));
+}
+
     /**
      * Show the form for creating a new resource.
      *
