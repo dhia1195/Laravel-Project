@@ -3,17 +3,31 @@
 namespace App\Http\Controllers;
 use App\Models\Transport;
 use Illuminate\Http\Request;
-
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\TransportItineraire;
 class TransportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $transports = Transport::all();
-        return view('transport.index', compact('transports'));
-    }
+    public function index(Request $request)
+{
+    // Get the search term from the request
+    $searchTerm = $request->input('search');
+
+    // Retrieve transports, applying a search filter if a search term is provided
+    $transports = Transport::when($searchTerm, function($query, $searchTerm) {
+        return $query->where('nom_trans', 'like', '%' . $searchTerm . '%');
+    })->get();
+
+    // Count transports by type
+    $transportCounts = $transports->groupBy('type_trans')->map(function ($group) {
+        return $group->count();
+    });
+
+    return view('transport.index', compact('transports', 'transportCounts'));
+}
 
     /**
      * Show the form for creating a new resource.
@@ -66,7 +80,7 @@ class TransportController extends Controller
         $validatedData = $request->validate([
             'nom_trans' => 'required|string|max:255',
             'type_trans' => 'required|string',
-            'prix_trans' => 'required|numeric',
+            'prix_trans' => 'required|numeric|min:0.01',
             'impact_carbone' => 'required|string',
         ]);
         $transport = Transport::findOrFail($id);

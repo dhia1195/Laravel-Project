@@ -1,6 +1,12 @@
 <x-layouts.app>
     <div class="container mt-5">
         <h1 class="mb-4">Liste des Hébergements</h1>
+        <form method="GET" action="{{ route('hebergements.index') }}" class="mb-3">
+            <div class="d-flex">
+                <input type="text" name="search" value="{{ request('search') }}" class="form-control me-2" placeholder="Rechercher par nom..." />
+                <button class="btn btn-success" type="submit">Rechercher</button>
+            </div>
+        </form>
         <a href="{{ route('hebergements.create') }}" class="btn btn-success mb-3">Ajouter un Hébergement</a>
         
         <table class="table table-bordered">
@@ -123,7 +129,9 @@
                                             <input type="text" name="ville" class="form-control" value="{{ old('ville', $hebergement->ville) }}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="prix_nuit" class="form-label">Prix par nuit :</label>
+                                            <label for="prix_nuit" class="form-label">Prix par nuit :
+                                                
+                                            </label>
                                             <input type="number" name="prix_nuit" class="form-control" step="0.01" value="{{ old('prix_nuit', $hebergement->prix_nuit) }}" required>
                                         </div>
                                         <div class="mb-3">

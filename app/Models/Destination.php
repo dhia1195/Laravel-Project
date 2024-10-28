@@ -18,4 +18,8 @@ class Destination extends Model
     {
         return $this->hasMany(Itineraire::class);
     }
+    public function transDestination()
+    {
+        return $this->hasMany(TransportItineraire::class);
+    }
 }

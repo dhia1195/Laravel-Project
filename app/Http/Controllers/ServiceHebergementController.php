@@ -18,11 +18,15 @@ class ServiceHebergementController extends Controller
     { 
         $services = ServiceHebergement::with('hebergement')->get();
         $hebergements = Hebergement::all(); // Fetch all hebergements
-        return view('services_hebergement.index', compact('services', 'hebergements'));
-      
     
+        // Calculate availability statistics
+        $totalServices = $services->count();
+        $availableServices = $services->where('disponibilite', true)->count();
+        $unavailableServices = $totalServices - $availableServices;
+    
+        return view('services_hebergement.index', compact('services', 'hebergements', 'totalServices', 'availableServices', 'unavailableServices'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -18,8 +18,6 @@ use App\Http\Livewire\Tables;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
-use App\Http\Controllers\TransportController;
-use App\Http\Controllers\TransportItineraireController;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Controllers\ReclamationController;
@@ -31,6 +29,9 @@ use App\Http\Controllers\Mail;
 use App\Http\Controllers\HebergementController;
 
 use App\Http\Controllers\ServiceHebergementController;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TransportItineraireController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,6 +126,9 @@ Route::middleware('auth')->group(function () {
         
 Route::get('/heber', [HebergementController::class, 'showForHebergement'])->name('frontheberg.hebergfront');
 Route::get('/serv/{id}', [ServiceHebergementController::class, 'frontIndex'])->name('frontheberg.serheber');
+
+Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
+Route::get('/frontdetails/{id}', [TransportItineraireController::class, 'frontIndex'])->name('frontTransport.showFront');
 
 
     });
