@@ -52,7 +52,6 @@ Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-passwo
 
 Route::get('/reset-password/{id}',ResetPassword::class)->name('reset-password')->middleware('signed');
 
-Route::get('/reclamation', [ReclamationController::class, 'showForClient'])->name('reclamation.front');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
@@ -92,23 +91,25 @@ Route::middleware('auth')->group(function () {
         Route::patch('/etapes/{id}', [EtapeItineraireController::class, 'update'])->name('etapes.update');
         Route::delete('/etapes/{id}', [EtapeItineraireController::class, 'destroy'])->name('etapes.destroy');
         Route::get('/avis', AvisC::class)->name('avis');
-
+        
         Route::resource('transport', TransportController::class);
         Route::resource('transport_itineraires', TransportItineraireController::class);
         Route::put('transport_itineraires/{id}', [TransportItineraireController::class,'update'])->name('transport_itineraires.update');
-
-
+        
+        
     });
-
+    
     // Only client can access client-specific pages
     Route::middleware('role:client')->group(function () {
         Route::get('/destinationFront', DestinationFront::class)->name('destination-front');
         Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+        Route::post('/reclamation', [ReclamationController::class, 'store'])->name('reclamations.store');
+        Route::get('/reclamation', [ReclamationController::class, 'showForClient'])->name('reclamation.front');
         Route::delete('/reservationF/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
         Route::get('/destinationFront/{id}', DestinationDetailF::class)->name('destination-detailF');
         Route::get('/itinerairesF', [ItineraireController::class, 'showForClient'])->name('itineraires.front');
         Route::get('/reservationF', [ReservationController::class, 'showForClient'])->name('reservation.front');
-
+        
         Route::get('/etapesF/{itineraire_id}', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.frontIndex');
         Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
         Route::get('/frontdetails/{id}', [TransportItineraireController::class, 'frontIndex'])->name('frontTransport.showFront');
