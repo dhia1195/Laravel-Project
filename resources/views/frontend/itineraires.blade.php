@@ -112,6 +112,7 @@
 
 <a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-info animated-button mt-3">Voir Étapes Associées</a>
 
+
                             </div>
                         </div>
                     </div>
