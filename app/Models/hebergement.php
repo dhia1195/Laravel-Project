@@ -18,4 +18,10 @@ class hebergement extends Model
     'prix_nuit',  // Attention à bien utiliser 'prix_nuit' ici et non 'prix'
     'impact_environnemental',
     'image_url'];
+
+    public function servicehebs()
+    {
+        return $this->hasMany(ServiceHebergement::class);
+    }
+
 }
