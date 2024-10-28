@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('itineraires', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('destination_id')->constrained('destination')->onDelete('cascade');
             $table->string('titre');
             $table->text('description');
             $table->integer('duree'); // e.g. duration in hours or days
