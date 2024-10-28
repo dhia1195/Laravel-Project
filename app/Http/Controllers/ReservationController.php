@@ -49,7 +49,7 @@ class ReservationController extends Controller
         }
         $reservation = Reservation::create($validatedData);
         if ($request->input('source') === 'frontoffice') {
-            return redirect()->back()->with('success', 'Réservation confirmée !');
+            return redirect()->route('reservation.front')->with('success', 'Reservation created successfully!');
         }
         return redirect()->route('reservations.index')->with('success', 'Reservation created successfully!');
     }
@@ -109,18 +109,14 @@ class ReservationController extends Controller
         }
 
         $reservation->delete();
-        return redirect()->route('reservations.index')->with('success', 'Reclamation deleted successfully.');
+        return redirect()->back()->with('success', 'Réservation supprimée !');
     }
 
     public function showForClient()
     {
         $userId = auth()->id(); // Get the authenticated user ID
         $reservations = Reservation::where('user_id', $userId)->get();
-        $itineraires = Itineraire::all(); // Assuming Itineraire is your model
-        $hebergements = hebergement::all(); // Assuming Hebergement is your model
-        $transports = Transport::all();
-        return view('reservations.index', compact('reservations', 'itineraires', 'hebergements', 'transports'));
-        //return view('frontend.reservation', compact('reservations'));
+        return view('frontend.reservation', compact('reservations'));
     }
 
 }

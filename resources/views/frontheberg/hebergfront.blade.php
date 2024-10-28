@@ -11,7 +11,7 @@
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <!-- Fonts and icons -->
+        <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
         <!-- Material Icons -->
@@ -74,37 +74,46 @@
         <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
             <div class="container">
                 <div class="section text-center">
-                    <h2 class="title mb-4">Transports</h2>
+                    <h2 class="title mb-4">Hébergements</h2>
                     <div class="row">
-                        @foreach($transports as $transport)
+                        @foreach($hebergements as $hebergement)
                             <div class="col-lg-4 col-md-6 mb-4">
                                 <div class="card shadow-sm border-0">
-                                    <!-- <img src="{{ $transport->image_url ?? 'default_image_url.jpg' }}" 
-                                         alt="{{ $transport->nom_trans }}" 
+                                    <img src="{{ $hebergement->image_url }}" 
+                                         alt="{{ $hebergement->titre }}" 
                                          class="card-img-top img-fluid rounded-top" 
-                                         style="height: 200px; object-fit: cover;"> -->
+                                         style="height: 200px; object-fit: cover;">
                                     <div class="card-body">
+                                        <!-- Link only on title -->
                                         <h5 class="card-title">
-                                            <a href="{{ route('transport.show', $transport->id) }}" class="text-decoration-none">
-                                                {{ $transport->nom_trans }}
+                                            <a href="{{ route('hebergements.show', $hebergement->id) }}" class="text-decoration-none">
+                                                {{ $hebergement->titre }}
                                             </a>
                                         </h5>
+                                        <p class="card-text">{{ Str::limit($hebergement->description, 100) }}</p>
                                         <ul class="list-unstyled">
-                                            <li><strong>Type:</strong> {{ $transport->type_trans }}</li>
-                                            <li><strong>Prix:</strong> {{ $transport->prix_trans }} €</li>
-                                            <li><strong>Impact carbone:</strong> {{ $transport->impact_carbone }}</li>
+                                            <li><strong>Nom:</strong> {{ $hebergement->nom }}</li>
+                                            <li><strong>Type:</strong> {{ $hebergement->type }}</li>
+                                            <li><strong>Adresse:</strong> {{ $hebergement->adresse }}</li>
+                                            <li><strong>Pays:</strong> {{ $hebergement->pays }}</li>
+                                            <li><strong>Ville:</strong> {{ $hebergement->ville }}</li>
+                                            <li><strong>Capacité:</strong> {{ $hebergement->capacite }}</li>
+                                            <li><strong>Prix par nuit:</strong> {{ $hebergement->prix_nuit }} €</li>
+                                            <li><strong>Impact environnemental:</strong> {{ $hebergement->impact_environnemental }}</li>
                                         </ul>
-                                        <a href="{{ route('frontTransport.showFront', ['id' => $transport->id]) }}" class="btn btn-primary">Details</a>
+                                        <!-- Add the Details button -->
+                                        <a href="{{ route('frontheberg.serheber', ['id' => $hebergement->id]) }}" class="btn btn-primary">Details</a>
+
 
                                     </div>
                                 </div>
                             </div>
                         @endforeach
 
-                        @if($transports->isEmpty())
+                        @if($hebergements->isEmpty())
                             <div class="col-12">
                                 <div class="alert alert-warning text-center" role="alert">
-                                    Aucun transport trouvé.
+                                    Aucun hébergement trouvé.
                                 </div>
                             </div>
                         @endif
@@ -180,58 +189,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-6 col-6 mb-4">
-                        <div>
-                            <h6 class="text-sm">Resources</h6>
-                            <ul class="flex-column ms-n3 nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/contact-us" target="_blank">
-                                        Contact Us
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/license" target="_blank">
-                                        License
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/terms" target="_blank">
-                                        Terms & Conditions
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/privacy" target="_blank">
-                                        Privacy Policy
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-6 mb-4">
-                        <div>
-                            <h6 class="text-sm">Help</h6>
-                            <ul class="flex-column ms-n3 nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/faq" target="_blank">
-                                        FAQ
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="https://www.creative-tim.com/contact-us" target="_blank">
-                                        Contact Us
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </footer>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="assets/js/material-kit.js?v=3.0.0"></script>
+        <!--   Core JS Files   -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/0U94xr3j/Ud0hlg3+ZmC5iI39qxt+f+N6fOZMg" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybVz8GGiytE1VZiO6lh7xI0w4gqAaLM7Vhc5VoT+4/JG7G4J4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha384-x2Oqv7/ZpsUiTf5ZUtqPzF95GAe1rP/Zf3L2C4nZnxK+trgK1N6iyhV3eghfwgb" crossorigin="anonymous"></script>
+        <script src="assets/js/material-kit.js?v=3.0.0" type="text/javascript"></script>
     </body>
 
     </html>

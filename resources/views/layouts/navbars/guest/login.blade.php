@@ -23,6 +23,7 @@ Infinity        </a>
                  </a>
  </li>
 
+ 
  <li class="nav-item">
 <a class="nav-link text-dark me-2" href="{{ route('user-profile') }}">
 <i class="fas fa-user opacity-6 text-dark me-1"></i> User Profile
@@ -32,6 +33,12 @@ Infinity        </a>
 <li class="nav-item">
     <a class="nav-link text-dark me-2" href="{{ route('reservation.front') }}">
     <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reservations
+                 </a>
+ </li>
+ 
+<li class="nav-item">
+    <a class="nav-link text-dark me-2" href="{{ route('frontheberg.hebergfront') }}">
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Hebergements
                  </a>
  </li>
 
@@ -47,7 +54,7 @@ Infinity        </a>
         </a>
     </li>
 <li class="nav-item">
-    <a class="nav-link text-dark me-2" >
+    <a class="nav-link text-dark me-5" >
         <i class="fas fa-user opacity-6 text-dark me-1"></i> <?php echo auth()->user()->name; ?>
     </a>
 </li>

@@ -85,7 +85,7 @@
     <div class="container my-4">
     <div class="card">
         <div class="card-header pb-0 px-3">
-            <h6 class="mb-0">List of Reservations</h6>
+            <h6 class="mb-0">Mes Réservations</h6>
         </div>
         <div class="card-body pt-4 p-3">
             <div style="max-height: 500px; overflow-y: auto;">
@@ -106,51 +106,8 @@
                                     <i class="far fa-trash-alt me-2"></i>Delete
                                 </button>
                             </form>
-                            <button type="button" class="btn btn-link text-dark mb-0" data-bs-toggle="modal" data-bs-target="#updateReservationModal{{ $reservation->id }}">
-                                <i class="fas fa-pencil-alt me-2"></i>Edit
-                            </button>
                         </div>
                     </li>
-
-                    <!-- Edit Reservation Modal -->
-                    <div class="modal fade" id="updateReservationModal{{ $reservation->id }}" tabindex="-1" aria-labelledby="updateReservationModalLabel{{ $reservation->id }}" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit Reservation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label>Itinerary</label>
-                                        <select class="form-select" name="itineraire_id">
-                                            @foreach ($itineraires as $itineraire)
-                                            <option value="{{ $itineraire->id }}" {{ $reservation->itineraire_id == $itineraire->id ? 'selected' : '' }}>{{ $itineraire->titre }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label class="mt-3">Accommodation</label>
-                                        <select class="form-select" name="hebergement_id">
-                                            @foreach ($hebergements as $hebergement)
-                                            <option value="{{ $hebergement->id }}" {{ $reservation->hebergement_id == $hebergement->id ? 'selected' : '' }}>{{ $hebergement->nom }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label class="mt-3">Transport</label>
-                                        <select class="form-select" name="transport_id">
-                                            @foreach ($transports as $transport)
-                                            <option value="{{ $transport->id }}" {{ $reservation->transport_id == $transport->id ? 'selected' : '' }}>{{ $transport->nom_trans }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Update Reservation</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     @endforeach
                 </ul>
             </div>

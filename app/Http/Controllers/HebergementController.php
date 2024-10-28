@@ -46,7 +46,10 @@ class HebergementController extends Controller
             'image_url' => 'nullable|url',
         ]);
         Hebergement::create($validated);
+
+        
         return redirect()->route('hebergements.index');
+
     }
 
     /**
@@ -85,17 +88,16 @@ class HebergementController extends Controller
     \Log::info('Updating Hebergement', ['id' => $id, 'data' => $request->all()]);
 
     // Validation
-    $request->validate([
-        'nom' => 'required|string|max:255',
-        'description' => 'required|string',
-        'type' => 'required|string|max:255',
-        'adresse' => 'required|string|max:255',
-        'pays' => 'required|string|max:255',
-        'ville' => 'required|string|max:255',
-        'prix_nuit' => 'required|numeric',
-        'impact_environnemental' => 'required|string|max:255',
-        'image_url' => 'nullable|url',
-    ]);
+    Schema::create('service_hebergements', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('hebergement_id')->constrained('hebergements')->onDelete('cascade');
+        $table->string('service_nom');
+        $table->text('description');
+        $table->boolean('disponibilite'); // boolean as per validation
+        $table->decimal('prix_service', 8, 2); // matches validation 'prix_service'
+        $table->timestamps();
+    });
+    
     
     // Find and update
     $hebergement = Hebergement::findOrFail($id);
@@ -129,4 +131,15 @@ class HebergementController extends Controller
         // Rediriger vers la liste des hébergements avec un message de succès
         return redirect()->route('hebergements.index')->with('success', 'Hébergement supprimé avec succès.');
     }
+    public function showForHebergement()
+    {
+        $hebergements = Hebergement::all();
+        $user=auth()->user();
+        return view('frontheberg.hebergfront', compact('hebergements', 'user')); 
+    }
+    public function serviceHebergements()
+    {
+        return $this->hasMany(ServiceHebergement::class, 'hebergement_id');
+    }
 }
+
