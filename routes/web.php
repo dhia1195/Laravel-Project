@@ -25,11 +25,11 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\ReservationController;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\TransportController;
-use App\Http\Controllers\TransportItineraireController;
+use App\Http\Controllers\Mail;
 
+use App\Http\Controllers\HebergementController;
 
-
+use App\Http\Controllers\ServiceHebergementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/login/forgot-password', ForgotPassword::class)->name('forgot-password');
 Route::get('/reset-password/{id}', ResetPassword::class)->name('reset-password')->middleware('signed');
 
+Route::get('/etapes/export-test', [EtapeItineraireController::class, 'exportEtapes'])->name('etapes.export');
 
 
 Route::middleware('auth')->group(function () {
@@ -97,6 +98,15 @@ Route::middleware('auth')->group(function () {
         Route::put('transport_itineraires/{id}', [TransportItineraireController::class,'update'])->name('transport_itineraires.update');
         
         
+    Route::resource('hebergements', HebergementController::class);
+    Route::put('/hebergements/{id}', [HebergementController::class, 'update'])->name('hebergements.update');
+
+    Route::resource('services_hebergement', ServiceHebergementController::class);
+    Route::put('/services_hebergement/{id}', [ServiceController::class, 'update'])->name('services_hebergement.update');
+
+
+
+
     });
     
     // Only client can access client-specific pages
@@ -111,8 +121,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/reservationF', [ReservationController::class, 'showForClient'])->name('reservation.front');
         
         Route::get('/etapesF/{itineraire_id}', [EtapeItineraireController::class, 'frontIndex'])->name('etapes.frontIndex');
-        Route::get('/frontendIndex', [TransportController::class, 'frontendIndex'])->name('frontTransport.front');
-        Route::get('/frontdetails/{id}', [TransportItineraireController::class, 'frontIndex'])->name('frontTransport.showFront');
+        
+Route::get('/heber', [HebergementController::class, 'showForHebergement'])->name('frontheberg.hebergfront');
+Route::get('/serv/{id}', [ServiceHebergementController::class, 'frontIndex'])->name('frontheberg.serheber');
+
+
     });
 
     // Accessible to all authenticated users

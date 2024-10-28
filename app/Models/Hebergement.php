@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class hebergement extends Model
+class Hebergement extends Model
 {
     use HasFactory;
     protected $table = 'hebergements';
@@ -23,5 +23,4 @@ class hebergement extends Model
     {
         return $this->hasMany(ServiceHebergement::class);
     }
-
 }
