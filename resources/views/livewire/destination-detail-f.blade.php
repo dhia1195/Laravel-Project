@@ -45,6 +45,9 @@
         <div class="section text-center">
           <h2 class="title mb-4">Itineraries</h2>
           <div class="row">
+          @php
+              $hasReservedItineraire = $userReservedItineraireIds->isNotEmpty(); // Check if user has any reservations
+          @endphp
             @foreach($selectedDestination->itineraire as $itineraire)
               <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card shadow-sm border-0">
@@ -75,10 +78,60 @@
                     @endif
   
                     <!-- Link to View Steps -->
-                    <a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-info animated-button mt-3">Voir Étapes Associées</a>
-                  </div>
-                </div>
-              </div>
+                    <a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-info animated-button">Voir Étapes Associées</a>
+                    @if ($hasReservedItineraire && $userReservedItineraireIds->contains($itineraire->id))
+                        <!-- Show the reserved itinerary button -->
+                        <button class="btn btn-secondary" disabled>Déjà réservé</button>
+                    @elseif ($hasReservedItineraire)
+                        <!-- Disable button for all other itineraries if one is reserved -->
+                        <button class="btn btn-secondary" disabled>Réserver</button>
+                    @else
+                        <!-- Show normal button if no reservations exist -->
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reservationModal{{ $itineraire->id }}">Réserver</button>
+                    @endif
+<!-- Modal -->
+<div class="modal fade" id="reservationModal{{ $itineraire->id }}" tabindex="-1" aria-labelledby="reservationModalLabel{{ $itineraire->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reservationModalLabel{{ $itineraire->id }}">Compléter la Réservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('reservations.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="itineraire_id" value="{{ $itineraire->id }}">
+                    <input type="hidden" name="source" value="frontoffice">
+                    
+                    <div class="mb-3">
+                        <label for="transport_id" class="form-label">Transport</label>
+                        <select class="form-select" id="transport_id" name="transport_id" required>
+                            <option value="">Sélectionnez un transport</option>
+                            @foreach ($transports as $transport)
+                                <option value="{{ $transport->id }}">{{ $transport->nom_trans }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="hebergement_id" class="form-label">Hébergement</label>
+                        <select class="form-select" id="hebergement_id" name="hebergement_id" required>
+                            <option value="">Sélectionnez un hébergement</option>
+                            @foreach ($hebergements as $hebergement)
+                                <option value="{{ $hebergement->id }}">{{ $hebergement->nom }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Confirmer la Réservation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
             @endforeach
   
             <!-- No Itineraries Message -->
@@ -136,5 +189,8 @@
     <!-- End Footer Section -->
   
   </div> <!-- End of Single Root Element -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
   

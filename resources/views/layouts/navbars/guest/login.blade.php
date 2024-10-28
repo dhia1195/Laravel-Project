@@ -17,14 +17,9 @@ Infinity        </a>
                
               
 @if (auth()->user())
-<li class="nav-item">
-    <a class="nav-link text-dark me-2" href="{{ route('itineraires.front') }}">
-           <i class="fas fa-home opacity-6 text-dark me-1"></i> Accueil
-                 </a>
- </li>
  <li class="nav-item">
     <a class="nav-link text-dark me-2" href="{{ route('destination-front') }}">
-           <i class="fas fa-home opacity-6 text-dark me-1"></i> Destination
+           <i class="fas fa-home opacity-6 text-dark me-1"></i> Accueil
                  </a>
  </li>
 
@@ -33,6 +28,18 @@ Infinity        </a>
 <i class="fas fa-user opacity-6 text-dark me-1"></i> User Profile
 </a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark me-2" href="{{ route('reservation.front') }}">
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reservations
+                 </a>
+ </li>
+
+<li class="nav-item">
+    <a class="nav-link text-dark me-2" href="{{ route('reclamation.front') }}">
+    <i class="fas fa-recycle opacity-6 text-dark me-1"></i> Reclamation
+                 </a>
+ </li>
 
 <li class="nav-item d-flex align-items-center">
         <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">

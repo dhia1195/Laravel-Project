@@ -12,6 +12,10 @@
         @endif
 
         <a href="{{ route('etapes.create') }}" class="btn btn-primary mb-3">Créer une nouvelle Étape</a>
+        <a href="{{ route('etapes.export') }}" class="btn btn-success mb-3">
+    <i class="fas fa-file-excel"></i> Exporter les Étapes en Excel
+</a>
+
 
         <table class="table table-striped">
             <thead>

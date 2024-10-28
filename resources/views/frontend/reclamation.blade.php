@@ -4,136 +4,117 @@
 
     
     <!doctype html>
-<html lang="en">
+        <html lang="en">
 
-<head>
-  <title>Hello, world!</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-  <!-- Material Kit CSS -->
-  <link href="assets/css/material-kit.css?v=3.0.0" rel="stylesheet" />
-</head>
+        <head>
+        <title>reclamation</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <!--     Fonts and icons     -->
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <!-- Material Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <!-- Material Kit CSS -->
+        <link href="assets/css/material-kit.css?v=3.0.0" rel="stylesheet" />
+        </head>
 
-<body>
-  <!-- Navbar Transparent -->
-  <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
-    <div class="container">
-      
-      <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon mt-2">
-          <span class="navbar-toggler-bar bar1"></span>
-          <span class="navbar-toggler-bar bar2"></span>
-          <span class="navbar-toggler-bar bar3"></span>
-        </span>
-      </button>
-      
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!-- End Navbar -->
-
-
-  <div class="page-header min-vh-80" style="background-image: url('https://images.unsplash.com/photo-1630752708689-02c8636b9141?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80')">
-    <span class="mask bg-gradient-dark opacity-6"></span>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <div class="text-center">
-          <h1 class="text-white font-weight-bold display-4 animate-title">Travel Trek</h1>
-<h3 class="text-white font-weight-light animate-subtitle">Your Journey, One Step at a Time</h3>
-<style>
-@keyframes fadeInSlideUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);}
-    100% {
-        opacity: 1;
-        transform: translateY(0);}}
-.animate-title {
-    animation: fadeInSlideUp 1s ease-out forwards;
-}
-.animate-subtitle {
-    animation: fadeInSlideUp 1.2s ease-out forwards;
-    animation-delay: 0.5s; }
-</style>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
-    <div class="container">
-        <div class="section text-center">
-            <h2 class="title mb-4">Itineraries</h2>
-            <div class="row">
-                @foreach($itineraires as $itineraire)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card shadow-sm border-0">
-                            <img src="{{ asset('storage/' . $itineraire->image_url) }}" 
-                                 alt="{{ $itineraire->titre }}" 
-                                 class="card-img-top img-fluid rounded-top" 
-                                 style="height: 200px; object-fit: cover;">
-                            <div class="card-body">
-                                <!-- Link only on title -->
-                                <h5 class="card-title">
-                                    <a href="{{ route('itineraires.show', $itineraire->id) }}" class="text-decoration-none">
-                                        {{ $itineraire->titre }}
-                                    </a>
-                                </h5>
-                                <p class="card-text">{{ Str::limit($itineraire->description, 100) }}</p>
-                                <ul class="list-unstyled">
-                                    <li><strong>Duree:</strong> {{ $itineraire->duree }}</li>
-                                    <li><strong>Prix:</strong> {{ $itineraire->prix }}</li>
-                                    <li><strong>Difficulte:</strong> {{ $itineraire->difficulte }}</li>
-                                    <li><strong>Impact Carbone:</strong> {{ $itineraire->impact_carbone }}</li>
-                                </ul>
-
-                                <!-- Display associated Etapes -->
-                                @if($itineraire->etapes->isNotEmpty())
-    <h6 style="color: blue;">Étapes associées:</h6>
-    <ul class="list-unstyled">
-        @foreach($itineraire->etapes as $etape)
-            <li>{{ $etape->nom_etape }}</li>
-        @endforeach
-    </ul>
-@else
-    <p>Aucune étape associée.</p>
-@endif
-
-
-<a href="{{ route('etapes.frontIndex', ['itineraire_id' => $itineraire->id]) }}" class="btn btn-info animated-button mt-3">Voir Étapes Associées</a>
-
-
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-                @if($itineraires->isEmpty())
-                    <div class="col-12">
-                        <div class="alert alert-warning text-center" role="alert">
-                            No itineraries found.
-                        </div>
-                    </div>
-                @endif
+        <body>
+        <!-- Navbar Transparent -->
+        <nav class="navbar navbar-expand-lg position-absolute top-0 z-index-3 w-100 shadow-none my-3 navbar-transparent">
+            <div class="container">
+            
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mt-2">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+                </span>
+            </button>
+            
+                </ul>
             </div>
-        </div>          
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+
+        <div class="page-header min-vh-80" style="background-image: url('https://images.unsplash.com/photo-1630752708689-02c8636b9141?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2490&q=80')">
+            <span class="mask bg-gradient-dark opacity-6"></span>
+            <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                <div class="text-center">
+                <h1 class="text-white font-weight-bold display-4 animate-title">Travel Trek</h1>
+        <h3 class="text-white font-weight-light animate-subtitle">Your Journey, One Step at a Time</h3>
+        <style>
+        @keyframes fadeInSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);}
+            100% {
+                opacity: 1;
+                transform: translateY(0);}}
+        .animate-title {
+            animation: fadeInSlideUp 1s ease-out forwards;
+        }
+        .animate-subtitle {
+            animation: fadeInSlideUp 1.2s ease-out forwards;
+            animation-delay: 0.5s; }
+
+            .form-control {
+                border: 1px solid #ced4da; /* Bootstrap's default border color */
+                border-radius: .25rem; /* Optional: same as Bootstrap default */
+                box-shadow: none; /* Optional: remove box-shadow if you want a flat look */
+            }
+
+            .form-control:focus {
+                border-color: #80bdff; /* Bootstrap's focus border color */
+                outline: 0; /* Remove outline */
+                box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25); /* Bootstrap's focus shadow */
+            }
+        </style>
+
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    <div class="container my-4">
+        <h2 class="text-center">Ajouter une Reclamation</h2>
+
+        <!-- Display Validation Errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Reclamation Form -->
+        <form action="{{ route('reclamations.store') }}" method="POST">
+            @csrf <!-- CSRF Protection -->
+
+            <div class="mb-3">
+                <label for="titre" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="titre" name="titre" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Confirmer</button>
+        </form>
     </div>
-</div>
-
-</div>
-
-  </div>
-  <footer class="footer pt-5 mt-5">
+    <footer class="footer pt-5 mt-5">
     <div class="container">
       <div class=" row">
         <div class="col-md-3 mb-4 ms-auto">

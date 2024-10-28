@@ -45,7 +45,7 @@
                 <td>{{ $itineraire->prix }} €</td>
                 <td>{{ $itineraire->difficulte }}</td>
                 <td>{{ $itineraire->impact_carbone }} kg</td>
-                <td>{{ $itineraire->destination->nom }} </td>
+                <td>{{$itineraire->destination->nom ?? ""}} </td>
                 <td class="text-center"> <!-- Center the image -->
                     <img src="{{ asset('storage/' . $itineraire->image_url) }}" alt="{{ $itineraire->titre }}" class="img-fluid rounded shadow" style="width: 100px; height: auto;">
                 </td>

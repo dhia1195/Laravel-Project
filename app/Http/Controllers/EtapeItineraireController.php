@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\EtapeItineraire;
 use App\Models\Itineraire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Exports\EtapesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EtapeItineraireController extends Controller
 {
@@ -111,5 +114,8 @@ public function frontIndex($itineraire_id)
     // Return the view for showing the itinerary and its steps
     return view('frontend.etape', compact('itineraire'));
 }
-
+public function exportEtapes()
+{
+    return Excel::download(new EtapesExport, 'etapes.xlsx');
+}
 }
